@@ -1,5 +1,5 @@
 import React from 'react';
- 
+
 /**
  * A counter button: tap the button to increase the count.
  */
@@ -11,6 +11,17 @@ class Counter extends React.Component {
     };
   }
  
+componentDidMount() {
+  fetch('/github')
+  .then(response => response.json())
+  .then((data) => {
+    const repos = data.map((repo) =>
+      <p key={repo.id}>{repo.name}</p>
+    );
+    this.setState({ repos })
+  });
+}
+
   render() {
     return (
       <button
