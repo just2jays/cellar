@@ -1,4 +1,3 @@
-console.log('Sup Brah!?');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Counter from './Counter';
