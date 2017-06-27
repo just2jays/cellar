@@ -5,7 +5,6 @@ const webpackConfig = require('./webpack.config.js');
 const app = express();
 const compiler = webpack(webpackConfig);
 const bodyParser = require('body-parser');
-const db = require('./config/db');
 const request = require('request');
 
 app.use(bodyParser.urlencoded({ extended: true }));
