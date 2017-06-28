@@ -1,3 +1,6 @@
+import React from 'react';
+import { Table } from 'semantic-ui-react';
+
 class SongListRow extends React.Component {
   render() {
     var title = this.props.title;
@@ -11,3 +14,4 @@ class SongListRow extends React.Component {
     );
   }
 }
+export default SongListRow;
