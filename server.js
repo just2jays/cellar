@@ -16,7 +16,7 @@ const server = app.listen(3000, function() {
   console.log('Example app listening at http://%s:%s', host, port);
 });
 
-app.use(express.static(__dirname + '/www'));
+app.use(express.static(__dirname + '/public'));
  
 app.use(webpackDevMiddleware(compiler, {
   hot: true,

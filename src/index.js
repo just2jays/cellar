@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SongList from './SongList';
- 
+import App from './App';
+
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    React.createElement(SongList),
+    <App />,
     document.getElementById('app')
   );
 });
