@@ -19,7 +19,6 @@ class App extends React.Component {
     return (
       <div>
         <SearchBar />
-        <SongList />
       </div>
     )
   }

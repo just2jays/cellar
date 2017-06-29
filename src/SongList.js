@@ -6,33 +6,20 @@ import SongListRow from './SongListRow';
  * A counter button: tap the button to increase the count.
  */
 class SongList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            shows: []
+            shows: this.props.shows // Why is this not working?!
         };
-    }
- 
-    loadSongList(){
-        fetch('/collection/ween')
-        .then(response => response.json())
-        .then(json => {
-            this.setState({
-                shows: json.response.docs,
-            });
-        });
-    }
-
-    componentDidMount() {
-        this.loadSongList();
     }
 
     render() {
         var rows = [];
-        var lastCategory = null;
-        this.state.shows.forEach(function(show) {
-            rows.push(<SongListRow key={show.identifier} title={show.title} downloads={show.downloads} />);
-        });
+        if(this.props.shows.length > 0){
+            this.props.shows.forEach(function(show) {
+                rows.push(<SongListRow key={show.identifier} title={show.title} downloads={show.downloads} />);
+            });
+        }
         return (
             <Table basic>
                 <Table.Header>
@@ -41,7 +28,6 @@ class SongList extends React.Component {
                     <Table.HeaderCell>Status</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-
                 <Table.Body>{rows}</Table.Body>
             </Table>
         );
