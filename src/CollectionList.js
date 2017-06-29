@@ -7,7 +7,14 @@ class CollectionList extends React.Component {
         var rows = [];
         if(this.props.shows.length > 0){
             this.props.shows.forEach(function(show) {
-                rows.push(<CollectionListRow key={show.identifier} title={show.title} downloads={show.downloads} />);
+                rows.push(
+                    <CollectionListRow
+                        key={show.identifier}
+                        identifier={show.identifier}
+                        title={show.title}
+                        downloads={show.downloads}
+                    />
+                );
             });
         }
         return (
