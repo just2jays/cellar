@@ -6,6 +6,7 @@ const app = express();
 const compiler = webpack(webpackConfig);
 const bodyParser = require('body-parser');
 const request = require('request');
+const _ = require('lodash');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

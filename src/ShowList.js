@@ -26,7 +26,6 @@ class ShowList extends React.Component {
             //         amplitudeConfig.songs.push(amplitudeFile);
             //     }
             // });
-            console.log(json);
             var mp3Tracks = [];
             json.files.forEach(function(track) {
                 if ( track.format == 'VBR MP3' ) {
