@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-class SongListRow extends React.Component {
+class CollectionListRow extends React.Component {
   render() {
     var title = this.props.title;
     var downloads = this.props.downloads;
@@ -14,4 +14,4 @@ class SongListRow extends React.Component {
     );
   }
 }
-export default SongListRow;
+export default CollectionListRow;

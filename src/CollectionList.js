@@ -1,23 +1,13 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
-import SongListRow from './SongListRow';
+import CollectionListRow from './CollectionListRow';
 
-/**
- * A counter button: tap the button to increase the count.
- */
-class SongList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            shows: this.props.shows // Why is this not working?!
-        };
-    }
-
+class CollectionList extends React.Component {
     render() {
         var rows = [];
         if(this.props.shows.length > 0){
             this.props.shows.forEach(function(show) {
-                rows.push(<SongListRow key={show.identifier} title={show.title} downloads={show.downloads} />);
+                rows.push(<CollectionListRow key={show.identifier} title={show.title} downloads={show.downloads} />);
             });
         }
         return (
@@ -33,4 +23,4 @@ class SongList extends React.Component {
         );
     }
 }
-export default SongList;
+export default CollectionList;

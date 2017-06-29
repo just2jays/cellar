@@ -1,12 +1,12 @@
 import React from 'react'
 import { Input } from 'semantic-ui-react'
-import SongList from './SongList';
+import CollectionList from './CollectionList';
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-        shows: []
+        term: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -14,24 +14,20 @@ class SearchBar extends React.Component {
   handleInputChange(event) {
     if (event.target.value === "") {
       this.setState({
-        shows: []
+        term: ''
       });
     } else {
-        fetch('/collection/'+event.target.value)
-        .then(response => response.json())
-        .then(json => {
-            this.setState({
-                shows: json.response.docs
-            });
-        });
+      this.setState({
+        term: event.target.value
+      });
+      this.props.onSearchChange(event.target.value);
     }
   }
 
   render() {
     return (
-        <div>
+        <div className="search">
             <Input focus placeholder='Search...' onChange={this.handleInputChange} />
-            <SongList shows={this.state.shows} />
         </div>
     );
   }
