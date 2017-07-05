@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
 import CollectionList from './CollectionList';
 import ShowList from './ShowList';
 
