@@ -11,7 +11,8 @@ class ShowListRow extends React.Component {
     this.changeTrack = this.changeTrack.bind(this);
   }
 
-  changeTrack(event) {      
+  changeTrack(event) {
+      event.preventDefault();
       this.props.onTrackChange(event.target.getAttribute('data-tracknum'));
   }
 
