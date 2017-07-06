@@ -47,7 +47,7 @@ handleTrackChange(trackId) {
         }
         return (
             <div>
-                <Table basic>
+                <Table selectable>
                     <Table.Header>
                         <Table.Row>
                         <Table.HeaderCell>Track #</Table.HeaderCell>

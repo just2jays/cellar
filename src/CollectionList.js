@@ -18,7 +18,7 @@ class CollectionList extends React.Component {
             });
         }
         return (
-            <Table basic>
+            <Table selectable>
                 <Table.Header>
                     <Table.Row>
                     <Table.HeaderCell>Name</Table.HeaderCell>
