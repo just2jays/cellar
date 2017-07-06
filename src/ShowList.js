@@ -1,7 +1,6 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import ShowListRow from './ShowListRow';
-import AudioPlayer from './AudioPlayer';
 
 var _ = require('lodash');
 
@@ -16,7 +15,7 @@ class ShowList extends React.Component {
   }
 
     componentDidMount() {
-        fetch('/show/'+this.props.match.params.identifier)
+        fetch('/show/'+this.props.properties.match.params.identifier)
         .then(response => response.json())
         .then(json => {
             var mp3Tracks = [];
@@ -36,9 +35,7 @@ class ShowList extends React.Component {
 handleTrackChange(trackId) {
     var newTrack = _.find(this.state.tracks, function(track) { return track.track == trackId; });
     newTrack = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-    this.setState({
-        currentTrack: "https://archive.org/download/"+this.props.match.params.identifier+"/"+newTrack+".mp3"
-    });
+    this.props.onChangeTrack("https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+newTrack+".mp3");
   }
 
     render() {
@@ -59,7 +56,6 @@ handleTrackChange(trackId) {
                     </Table.Header>
                     <Table.Body>{rows}</Table.Body>
                 </Table>
-                <AudioPlayer track={this.state.currentTrack} />
             </div>
         );
     }

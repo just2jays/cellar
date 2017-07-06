@@ -3,14 +3,17 @@ import SearchBar from './SearchBar';
 import { Switch, Route } from 'react-router-dom';
 import CollectionList from './CollectionList';
 import ShowList from './ShowList';
+import AudioPlayer from './AudioPlayer';
 
 class App extends React.Component {
   constructor() {
       super();
       this.state = {
-          shows: []
+          shows: [],
+          currentTrack: ""
       }
       this.handleSearchChange = this.handleSearchChange.bind(this);
+      this.handleTrackChange = this.handleTrackChange.bind(this);
   }
 
   handleSearchChange(term) {
@@ -23,6 +26,12 @@ class App extends React.Component {
     });
   }
 
+handleTrackChange(file) {
+  this.setState({
+            currentTrack: file
+        });
+}
+
   render() {
     return (
       <div id="outer-container" style={{height: '100%'}}>
@@ -31,8 +40,11 @@ class App extends React.Component {
           <Route exact path='/' render={(props) => (
             <CollectionList shows={this.state.shows} />
           )} />
-          <Route path='/show/:identifier' component={ShowList}/>
+          <Route path='/show/:identifier' render={(props) => (
+            <ShowList properties={props} onChangeTrack={file => this.handleTrackChange(file)} />
+          )} />
         </Switch>
+        <AudioPlayer track={this.state.currentTrack} />
       </div>
     )
   }
