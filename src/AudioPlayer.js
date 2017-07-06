@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './main.scss';
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class AudioPlayer extends React.Component {
 
   render() {
     return (
+        <div className="player-container">
         <audio
             src={this.props.track}
             autoPlay
@@ -17,6 +19,7 @@ class AudioPlayer extends React.Component {
         >
         Your browser does not support the <code>audio</code> element.
         </audio>
+        </div>
     );
   }
 }

@@ -25,10 +25,14 @@
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0",
     "semantic-ui-react": "^0.70.0",
+    "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.11.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "css-loader": "^0.28.4",
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^6.0.6"
   }
 }
