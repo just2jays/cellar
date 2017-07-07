@@ -10,7 +10,7 @@ class App extends React.Component {
       super();
       this.state = {
           shows: [],
-          currentTrack: ""
+          currentTrack: {}
       }
       this.handleSearchChange = this.handleSearchChange.bind(this);
       this.handleTrackChange = this.handleTrackChange.bind(this);
@@ -26,10 +26,10 @@ class App extends React.Component {
     });
   }
 
-handleTrackChange(file) {
+handleTrackChange(info) {
   this.setState({
-            currentTrack: file
-        });
+      currentTrack: info
+  });
 }
 
   render() {
@@ -41,7 +41,7 @@ handleTrackChange(file) {
             <CollectionList shows={this.state.shows} />
           )} />
           <Route path='/show/:identifier' render={(props) => (
-            <ShowList properties={props} onChangeTrack={file => this.handleTrackChange(file)} />
+            <ShowList properties={props} onChangeTrack={info => this.handleTrackChange(info)} />
           )} />
         </Switch>
         <AudioPlayer track={this.state.currentTrack} />

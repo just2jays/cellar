@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from 'semantic-ui-react'
+import { Container, Input } from 'semantic-ui-react'
 import CollectionList from './CollectionList';
 
 class SearchBar extends React.Component {
@@ -26,9 +26,11 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-        <div className="search">
-            <Input focus placeholder='Search...' onChange={this.handleInputChange} />
-        </div>
+        <Container textAlign='center'>
+          <div className="search">
+              <Input icon='search' placeholder='Search...' onChange={this.handleInputChange} />
+          </div>
+        </Container>
     );
   }
 }

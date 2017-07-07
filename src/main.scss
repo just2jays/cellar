@@ -1,3 +1,9 @@
+$fixedPlayerHeight: 130px; // Size of bottom fixed controls for overflow scrolling
+
+.show-track-list {
+    margin-bottom: $fixedPlayerHeight;
+}
+
 .player-container {
     display: flex;
     flex-direction: row;
@@ -6,13 +12,19 @@
     bottom: 0;
     padding: 20px;
     width: 100%;
+    max-height: $fixedPlayerHeight;
 
     // via: https://uigradients.com/#SteelGray
     background: #1F1C2C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #928DAB, #1F1C2C);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #928DAB, #1F1C2C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
-    .progress-bar .bar {
-        min-width: 0em;
+    .progress-bar {
+        .label {
+            color: #fff;
+        }
+        .bar {
+            min-width: 0em;
+        }
     }
 }

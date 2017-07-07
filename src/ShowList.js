@@ -34,8 +34,13 @@ class ShowList extends React.Component {
 
 handleTrackChange(trackId) {
     var newTrack = _.find(this.state.tracks, function(track) { return track.track == trackId; });
-    newTrack = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-    this.props.onChangeTrack("https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+newTrack+".mp3");
+    var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
+    var newTrackInfo = {
+        trackTitle: newTrack.title,
+        trackArtist: newTrack.creator,
+        trackFile: "https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+trackFile+".mp3"
+    };
+    this.props.onChangeTrack(newTrackInfo);
   }
 
     render() {
@@ -46,7 +51,7 @@ handleTrackChange(trackId) {
             }, this));
         }
         return (
-            <div>
+            <div className="show-track-list">
                 <Table selectable>
                     <Table.Header>
                         <Table.Row>

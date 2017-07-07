@@ -62,16 +62,16 @@ class AudioPlayer extends React.Component {
             <ReactHowler
               ref={(ref) => (this.player = ref)}
               html5={true}
-              src={[this.props.track]}
+              src={[this.props.track.trackFile]}
               playing={this.state.playing}
               onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
             />
-            <div>
-              <Progress size='small' className='progress-bar' percent={this.state.progressPercent} />
+            <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
+            <div className="button-container">
+              <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
+              <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
             </div>
-            <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
-            <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
           </div>
         </div>
     );
