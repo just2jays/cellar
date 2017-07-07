@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactHowler from 'react-howler';
-import { Button, Progress } from 'semantic-ui-react';
+import { Divider, Container, Button, Progress } from 'semantic-ui-react';
 import './main.scss';
 
 class AudioPlayer extends React.Component {
@@ -67,11 +67,14 @@ class AudioPlayer extends React.Component {
               onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
             />
-            <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
-            <div className="button-container">
+            <Container textAlign='center'>
+              <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
+            </Container>
+            <Divider clearing hidden />
+            <Container textAlign='center'>
               <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
               <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
-            </div>
+            </Container>
           </div>
         </div>
     );

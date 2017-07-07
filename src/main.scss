@@ -5,9 +5,6 @@ $fixedPlayerHeight: 130px; // Size of bottom fixed controls for overflow scrolli
 }
 
 .player-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     position: fixed;
     bottom: 0;
     padding: 20px;
