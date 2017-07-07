@@ -7,7 +7,7 @@ module.exports = function(app, db) {
 
     app.get('/collection/:name', (req, res) => {
         request({
-            url: 'https://archive.org/advancedsearch.php?q=collection%3A%28'+req.params.name+'%29&fl%5B%5D=avg_rating&fl%5B%5D=collection&fl%5B%5D=date&fl%5B%5D=description&fl%5B%5D=downloads&fl%5B%5D=identifier&fl%5B%5D=title&sort%5B%5D=addeddate+desc&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json',
+            url: 'https://archive.org/advancedsearch.php?q=collection%3A%28etree%29format%3A%28VBR+MP3%29creator%3A%28'+req.params.name+'%29&sort%5B%5D=date+desc&output=json',
             headers: {
                 'user-agent': 'node.js',
             },
