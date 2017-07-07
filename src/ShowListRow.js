@@ -19,11 +19,13 @@ class ShowListRow extends React.Component {
   render() {
     var title = this.props.title;
     var number = this.props.number;
+    var duration = this.props.duration;
 
     return (
         <Table.Row>
             <Table.Cell>{number}</Table.Cell>
             <Table.Cell><a data-tracknum={number} href="#" onClick={this.changeTrack}>{title}</a></Table.Cell>
+            <Table.Cell>{duration}</Table.Cell>
         </Table.Row>
     );
   }

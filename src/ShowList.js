@@ -42,7 +42,7 @@ handleTrackChange(trackId) {
         var rows = [];
         if(this.state.tracks.length > 0){
             this.state.tracks.forEach(_.bind(function(track) {
-                rows.push(<ShowListRow onTrackChange={trackId => this.handleTrackChange(trackId)} key={track.original} title={track.title} number={track.track} />);
+                rows.push(<ShowListRow onTrackChange={trackId => this.handleTrackChange(trackId)} key={track.original} title={track.title} number={track.track} duration={track.length} />);
             }, this));
         }
         return (
@@ -52,6 +52,7 @@ handleTrackChange(trackId) {
                         <Table.Row>
                         <Table.HeaderCell>Track #</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Duration</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>{rows}</Table.Body>
