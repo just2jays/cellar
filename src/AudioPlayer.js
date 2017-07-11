@@ -75,7 +75,6 @@ class AudioPlayer extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={8}>
                   <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
-                  <Divider clearing hidden />
                   <Container textAlign='center'>
                     <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
                     <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
