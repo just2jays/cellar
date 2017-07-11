@@ -1,5 +1,6 @@
-import React from 'react'
-import { Container, Input } from 'semantic-ui-react'
+import React from 'react';
+import { Container, Input } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 import CollectionList from './CollectionList';
 
 class SearchBar extends React.Component {
@@ -12,6 +13,7 @@ class SearchBar extends React.Component {
   }
 
   handleInputChange(event) {
+    this.props.history.push('/');
     if (event.target.value === "") {
       this.setState({
         term: ''
@@ -35,4 +37,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);
