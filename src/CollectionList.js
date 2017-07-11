@@ -18,15 +18,17 @@ class CollectionList extends React.Component {
             });
         }
         return (
-            <Table selectable>
-                <Table.Header>
-                    <Table.Row>
-                    <Table.HeaderCell>Name</Table.HeaderCell>
-                    <Table.HeaderCell>Status</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>{rows}</Table.Body>
-            </Table>
+            <div className="show-list">
+                <Table selectable>
+                    <Table.Header>
+                        <Table.Row>
+                        <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Downloads</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>{rows}</Table.Body>
+                </Table>
+            </div>
         );
     }
 }
