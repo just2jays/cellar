@@ -1,7 +1,14 @@
 $fixedPlayerHeight: 130px; // Size of bottom fixed controls for overflow scrolling
 
+.search {
+    margin-top: 10px;
+}
+
 .show-list,
 .show-track-list {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
     margin-bottom: $fixedPlayerHeight;
 }
 
