@@ -18,6 +18,7 @@ class AudioPlayer extends React.Component {
     
     this.handleOnLoad = this.handleOnLoad.bind(this);
     this.handleOnPlay = this.handleOnPlay.bind(this)
+    this.handleOnEnd = this.handleOnEnd.bind(this)
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
@@ -36,6 +37,10 @@ class AudioPlayer extends React.Component {
       playing: true,
       playIcon: 'pause'
     });
+  }
+
+  handleOnEnd() {
+    console.log('The track has ended...fare thee well...');
   }
 
   handlePlayPause() {
@@ -86,6 +91,7 @@ class AudioPlayer extends React.Component {
               playing={this.state.playing}
               onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
+              onEnd={this.handleOnEnd}
             />
             <Grid divided>
               <Grid.Row>
