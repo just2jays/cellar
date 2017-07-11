@@ -9,7 +9,8 @@ class ShowList extends React.Component {
       super();
       this.state = {
           tracks: [],
-          currentTrack: ""
+          currentTrack: "",
+          showImage: ""
       }
       this.handleTrackChange = this.handleTrackChange.bind(this);
   }
@@ -27,6 +28,7 @@ class ShowList extends React.Component {
             });
 
             this.setState({
+                showImage: json.misc.image,
                 tracks: mp3Tracks
             });
         });
@@ -38,7 +40,8 @@ handleTrackChange(trackId) {
     var newTrackInfo = {
         trackTitle: newTrack.title,
         trackArtist: newTrack.creator,
-        trackFile: "https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+trackFile+".mp3"
+        trackFile: "https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+trackFile+".mp3",
+        showImage: this.state.showImage
     };
     this.props.onChangeTrack(newTrackInfo);
   }

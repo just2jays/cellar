@@ -24,4 +24,11 @@ $fixedPlayerHeight: 130px; // Size of bottom fixed controls for overflow scrolli
             min-width: 0em;
         }
     }
+
+    .show-image-holder {
+        height: 80px;
+        width: 80px;
+        background-size: cover;
+        background-position: center center;
+    }
 }

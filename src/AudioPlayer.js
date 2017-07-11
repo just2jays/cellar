@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactHowler from 'react-howler';
-import { Divider, Container, Button, Progress } from 'semantic-ui-react';
+import { Divider, Container, Button, Grid, Progress } from 'semantic-ui-react';
 import './main.scss';
 
 class AudioPlayer extends React.Component {
@@ -56,6 +56,7 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
+    console.log(this.props.track);
     return (
         <div className="player-container">
           <div className="player-container-inner">
@@ -67,14 +68,22 @@ class AudioPlayer extends React.Component {
               onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
             />
-            <Container textAlign='center'>
-              <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
-            </Container>
-            <Divider clearing hidden />
-            <Container textAlign='center'>
-              <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
-              <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
-            </Container>
+            <Grid divided>
+              <Grid.Row>
+                <Grid.Column width={4}>
+                  <div className="show-image-holder" style={{backgroundImage: `url(${this.props.track.showImage})`}} />
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
+                  <Divider clearing hidden />
+                  <Container textAlign='center'>
+                    <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
+                    <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
+                  </Container>
+                </Grid.Column>
+                <Grid.Column width={4}></Grid.Column>
+              </Grid.Row>
+            </Grid>
           </div>
         </div>
     );
