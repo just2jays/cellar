@@ -12,13 +12,15 @@ class AudioPlayer extends React.Component {
         mute: false,
         volume: 1.0,
         loaded: false,
-        progressPercent: 0
+        progressPercent: 0,
+        playIcon: 'play'
     };
     
     this.handleOnLoad = this.handleOnLoad.bind(this);
     this.handleOnPlay = this.handleOnPlay.bind(this)
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
+    this.handlePlayPause = this.handlePlayPause.bind(this);
   }
 
   handleOnLoad() {
@@ -30,6 +32,24 @@ class AudioPlayer extends React.Component {
 
   handleOnPlay() {
     requestAnimationFrame(this.step.bind(this));
+    this.setState({
+      playing: true,
+      playIcon: 'pause'
+    });
+  }
+
+  handlePlayPause() {
+    if(this.state.playing) {
+      this.setState({
+        playing: false,
+        playIcon: 'play'
+      });
+    }else{
+      this.setState({
+        playing: true,
+        playIcon: 'pause'
+      });
+    }
   }
 
   handlePlay() {
@@ -56,7 +76,6 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
-    console.log(this.props.track);
     return (
         <div className="player-container">
           <div className="player-container-inner">
@@ -76,8 +95,9 @@ class AudioPlayer extends React.Component {
                 <Grid.Column width={8}>
                   <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
                   <Container textAlign='center'>
-                    <Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
-                    <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />
+                    <Button circular onClick={this.handlePlayPause} icon={this.state.playIcon} />
+                    {/*<Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
+                    <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />*/}
                   </Container>
                 </Grid.Column>
                 <Grid.Column width={4}></Grid.Column>
