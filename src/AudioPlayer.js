@@ -7,7 +7,8 @@ class AudioPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        playingTrack: this.props.track,
+        currentShow: {},
+        currentTrack: {},
         playing: true,
         mute: false,
         volume: 1.0,
@@ -22,6 +23,26 @@ class AudioPlayer extends React.Component {
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrevious = this.handlePrevious.bind(this);
+  }
+  handleNext(){
+    var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)+1); }, this));
+    newTrack = this.props.show[newTrack];
+
+    var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
+    newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
+
+    this.props.onTrackChange(newTrack);
+  }
+  handlePrevious(){
+    var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)-1); }, this));
+    newTrack = this.props.show[newTrack];
+
+    var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
+    newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
+
+    this.props.onTrackChange(newTrack);
   }
 
   handleOnLoad() {
@@ -40,7 +61,7 @@ class AudioPlayer extends React.Component {
   }
 
   handleOnEnd() {
-    console.log('The track has ended...fare thee well...');
+    this.handleNext();
   }
 
   handlePlayPause() {
@@ -87,7 +108,7 @@ class AudioPlayer extends React.Component {
             <ReactHowler
               ref={(ref) => (this.player = ref)}
               html5={true}
-              src={[this.props.track.trackFile]}
+              src={[this.props.track.fileLocation]}
               playing={this.state.playing}
               onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
@@ -96,14 +117,14 @@ class AudioPlayer extends React.Component {
             <Grid divided>
               <Grid.Row>
                 <Grid.Column width={4}>
-                  <div className="show-image-holder" style={{backgroundImage: `url(${this.props.track.showImage})`}} />
+                  <div className="show-image-holder" style={{backgroundImage: `url(${this.props.fullResponse.misc.image})`}} />
                 </Grid.Column>
                 <Grid.Column width={8}>
-                  <Progress label={`${this.props.track.trackArtist} - ${this.props.track.trackTitle}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
+                  <Progress label={`${this.props.track.creator} - ${this.props.track.title}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
                   <Container textAlign='center'>
+                    <Button onClick={this.handlePrevious} icon='fast backward' />
                     <Button circular onClick={this.handlePlayPause} icon={this.state.playIcon} />
-                    {/*<Button onClick={this.handlePause} content='Pause' icon='pause' labelPosition='left' />
-                    <Button onClick={this.handlePlay} content='Play' icon='right arrow' labelPosition='right' />*/}
+                    <Button onClick={this.handleNext} icon='fast forward' />
                   </Container>
                 </Grid.Column>
                 <Grid.Column width={4}></Grid.Column>
