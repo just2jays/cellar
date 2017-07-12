@@ -17,15 +17,19 @@ class AudioPlayer extends React.Component {
         playIcon: 'play'
     };
     
-    this.handleOnLoad = this.handleOnLoad.bind(this);
-    this.handleOnPlay = this.handleOnPlay.bind(this)
-    this.handleOnEnd = this.handleOnEnd.bind(this)
-    this.handlePlay = this.handlePlay.bind(this);
-    this.handlePause = this.handlePause.bind(this);
+    this.handleOnPlay = this.handleOnPlay.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleNext = this.handleNext.bind(this);
-    this.handlePrevious = this.handlePrevious.bind(this);
+    this.handleOnEnd = this.handleOnEnd.bind(this);
+    this.handleOnLoad = this.handleOnLoad.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      currentTrack: nextProps.track
+    });
+  }
+
   handleNext(){
     var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)+1); }, this));
     newTrack = this.props.show[newTrack];
@@ -35,23 +39,16 @@ class AudioPlayer extends React.Component {
 
     this.props.onTrackChange(newTrack);
   }
-  handlePrevious(){
-    var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)-1); }, this));
-    newTrack = this.props.show[newTrack];
+  // handlePrevious(){
+  //   var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)-1); }, this));
+  //   newTrack = this.props.show[newTrack];
 
-    var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-    newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
+  //   var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
+  //   newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
 
-    this.props.onTrackChange(newTrack);
-  }
+  //   this.props.onTrackChange(newTrack);
+  // }
 
-  handleOnLoad() {
-    this.setState({
-      loaded: true,
-      duration: this.player.duration(),
-      playing: true
-    });
-  }
 
   handleOnPlay() {
     requestAnimationFrame(this.step.bind(this));
@@ -64,9 +61,14 @@ class AudioPlayer extends React.Component {
   handleOnEnd() {
     this.setState({
       playing: false,
-      playIcon: 'pause'
     });
     this.handleNext();
+  }
+
+  handleOnLoad() {
+    this.setState({
+      playing: true,
+    });
   }
 
   handlePlayPause() {
@@ -81,18 +83,6 @@ class AudioPlayer extends React.Component {
         playIcon: 'pause'
       });
     }
-  }
-
-  handlePlay() {
-    this.setState({
-      playing: true
-    });
-  }
-
-  handlePause() {
-    this.setState({
-      playing: false
-    });
   }
 
   step() {
@@ -113,11 +103,11 @@ class AudioPlayer extends React.Component {
             <ReactHowler
               ref={(ref) => (this.player = ref)}
               html5={true}
-              src={[this.props.track.fileLocation]}
+              src={[this.state.currentTrack.fileLocation]}
               playing={this.state.playing}
-              onLoad={this.handleOnLoad}
               onPlay={this.handleOnPlay}
               onEnd={this.handleOnEnd}
+              onLoad={this.handleOnLoad}
             />
             <Grid divided>
               <Grid.Row>
@@ -127,9 +117,9 @@ class AudioPlayer extends React.Component {
                 <Grid.Column width={8}>
                   <Progress label={`${this.props.track.creator} - ${this.props.track.title}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
                   <Container textAlign='center'>
-                    <Button onClick={this.handlePrevious} icon='fast backward' />
+                    {/* <Button onClick={this.handlePrevious} icon='fast backward' /> */}
                     <Button circular onClick={this.handlePlayPause} icon={this.state.playIcon} />
-                    <Button onClick={this.handleNext} icon='fast forward' />
+                    {/* <Button onClick={this.handleNext} icon='fast forward' /> */}
                   </Container>
                 </Grid.Column>
                 <Grid.Column width={4}></Grid.Column>
