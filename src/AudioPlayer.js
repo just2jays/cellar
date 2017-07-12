@@ -62,6 +62,10 @@ class AudioPlayer extends React.Component {
   }
 
   handleOnEnd() {
+    this.setState({
+      playing: false,
+      playIcon: 'pause'
+    });
     this.handleNext();
   }
 
