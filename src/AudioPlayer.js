@@ -1,134 +1,58 @@
 import React from 'react';
-import ReactHowler from 'react-howler';
+
 import { Divider, Container, Button, Grid, Progress } from 'semantic-ui-react';
 import './main.scss';
 
 class AudioPlayer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        currentShow: {},
-        currentTrack: {},
-        playing: true,
-        mute: false,
-        volume: 1.0,
-        loaded: false,
-        progressPercent: 0,
-        playIcon: 'play'
-    };
-    
-    this.handleOnPlay = this.handleOnPlay.bind(this);
-    this.handlePlayPause = this.handlePlayPause.bind(this);
-    this.handleNext = this.handleNext.bind(this);
-    this.handleOnEnd = this.handleOnEnd.bind(this);
-    this.handleOnLoad = this.handleOnLoad.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentTrack: {},
+			playing: false,
+			progressPercent: 0,
+			playIcon: 'play',
+			sound: new Howl({src:[""]})
+		};
+	}
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      currentTrack: nextProps.track
-    });
-  }
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			currentTrack: nextProps.track
+		});
 
-  handleNext(){
-    var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)+1); }, this));
-    newTrack = this.props.show[newTrack];
+		this.state.sound.unload();
+		this.state.sound = new Howl({
+			src: [this.state.currentTrack.fileLocation],
+			html5: true
+		});
 
-    var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-    newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
-
-    this.props.onTrackChange(newTrack);
-  }
-  // handlePrevious(){
-  //   var newTrack = _.findIndex(this.props.show, _.bind(function(findtrack) { return parseInt(findtrack.track, 10) == (parseInt(this.props.track.track, 10)-1); }, this));
-  //   newTrack = this.props.show[newTrack];
-
-  //   var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-  //   newTrack.fileLocation = "https://archive.org/download/"+this.props.fullResponse.metadata.identifier[0]+"/"+trackFile+".mp3"
-
-  //   this.props.onTrackChange(newTrack);
-  // }
+		this.state.sound.play();
+	}
 
 
-  handleOnPlay() {
-    requestAnimationFrame(this.step.bind(this));
-    this.setState({
-      playing: true,
-      playIcon: 'pause'
-    });
-  }
 
-  handleOnEnd() {
-    this.setState({
-      playing: false,
-    });
-    this.handleNext();
-  }
-
-  handleOnLoad() {
-    this.setState({
-      playing: true,
-    });
-  }
-
-  handlePlayPause() {
-    if(this.state.playing) {
-      this.setState({
-        playing: false,
-        playIcon: 'play'
-      });
-    }else{
-      this.setState({
-        playing: true,
-        playIcon: 'pause'
-      });
-    }
-  }
-
-  step() {
-    var seek = this.player.seek() || 0;
-    this.setState({
-      progressPercent: (((seek / this.player.duration()) * 100) || 0)
-    });
-
-    if (this.state.playing) {
-      requestAnimationFrame(this.step.bind(this));
-    }
-  }
-
-  render() {
-    return (
-        <div className="player-container">
-          <div className="player-container-inner">
-            <ReactHowler
-              ref={(ref) => (this.player = ref)}
-              html5={true}
-              src={[this.state.currentTrack.fileLocation]}
-              playing={this.state.playing}
-              onPlay={this.handleOnPlay}
-              onEnd={this.handleOnEnd}
-              onLoad={this.handleOnLoad}
-            />
-            <Grid divided>
-              <Grid.Row>
-                <Grid.Column width={4}>
-                  <div className="show-image-holder" style={{backgroundImage: `url(${this.props.fullResponse.misc.image})`}} />
-                </Grid.Column>
-                <Grid.Column width={8}>
-                  <Progress label={`${this.props.track.creator} - ${this.props.track.title}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
-                  <Container textAlign='center'>
-                    {/* <Button onClick={this.handlePrevious} icon='fast backward' /> */}
-                    <Button circular onClick={this.handlePlayPause} icon={this.state.playIcon} />
-                    {/* <Button onClick={this.handleNext} icon='fast forward' /> */}
-                  </Container>
-                </Grid.Column>
-                <Grid.Column width={4}></Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </div>
-        </div>
-    );
-  }
+	render() {
+		return (
+			<div className="player-container">
+				<div className="player-container-inner">
+					<Grid divided>
+						<Grid.Row>
+							<Grid.Column width={4}>
+								<div className="show-image-holder" style={{ backgroundImage: `url(${this.props.fullResponse.misc.image})` }} />
+							</Grid.Column>
+							<Grid.Column width={8}>
+								<Progress label={`${this.props.track.creator} - ${this.props.track.title}`} size='small' className='progress-bar' percent={this.state.progressPercent} />
+								<Container textAlign='center'>
+									{/* <Button circular onClick={this.handlePlayPause} icon={this.state.playIcon} /> */}
+								</Container>
+							</Grid.Column>
+							<Grid.Column width={4}></Grid.Column>
+						</Grid.Row>
+					</Grid>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default AudioPlayer;
