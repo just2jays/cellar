@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Container, Table } from 'semantic-ui-react';
 import ShowListRow from './ShowListRow';
 
 var _ = require('lodash');
@@ -74,7 +74,7 @@ handleTrackChange(trackId) {
             }, this));
         }
         return (
-            <div className="show-track-list">
+            <Container className="show-track-list">
                 <Table selectable>
                     <Table.Header>
                         <Table.Row>
@@ -85,7 +85,7 @@ handleTrackChange(trackId) {
                     </Table.Header>
                     <Table.Body>{rows}</Table.Body>
                 </Table>
-            </div>
+            </Container>
         );
     }
 }

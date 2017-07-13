@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Input } from 'semantic-ui-react';
+import { Menu, Container, Input } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import CollectionList from './CollectionList';
 
@@ -7,9 +7,11 @@ class SearchBar extends React.Component {
   constructor() {
     super();
     this.state = {
-        term: ''
+        term: '',
+        activeItem: "home"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
   }
 
   handleInputChange(event) {
@@ -26,12 +28,23 @@ class SearchBar extends React.Component {
     }
   }
 
+  handleMenuItemClick(event){
+    (event, { name }) => this.setState({ activeItem: name })
+  } 
+
   render() {
     return (
-        <Container textAlign='center'>
-          <div className="search">
-              <Input icon='search' placeholder='Search...' onChange={this.handleInputChange} />
-          </div>
+        <Container className='top-search-menu'>
+          <Menu pointing secondary>
+            <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick} />
+            <Menu.Item name='messages' active={this.state.activeItem === 'messages'} onClick={this.handleItemClick} />
+            <Menu.Item name='friends' active={this.state.activeItem === 'friends'} onClick={this.handleItemClick} />
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Input icon='search' placeholder='Search...' onChange={this.handleInputChange} />
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu>
         </Container>
     );
   }

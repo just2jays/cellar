@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Container, Table } from 'semantic-ui-react';
 import CollectionListRow from './CollectionListRow';
 
 class CollectionList extends React.Component {
@@ -18,7 +18,7 @@ class CollectionList extends React.Component {
             });
         }
         return (
-            <div className="show-list">
+            <Container className="show-list">
                 <Table selectable>
                     <Table.Header>
                         <Table.Row>
@@ -28,7 +28,7 @@ class CollectionList extends React.Component {
                     </Table.Header>
                     <Table.Body>{rows}</Table.Body>
                 </Table>
-            </div>
+            </Container>
         );
     }
 }
