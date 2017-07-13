@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import CollectionList from './CollectionList';
 import ShowList from './ShowList';
 import AudioPlayer from './AudioPlayer';
+import ArtistInfo from './ArtistInfo';
 
 class App extends React.Component {
   constructor() {
@@ -63,6 +64,9 @@ handleTrackChange(trackObject) {
           )} />
           <Route path='/show/:identifier' render={(props) => (
             <ShowList properties={props} onChangeTrack={trackObject => this.handleTrackChange(trackObject)} />
+          )} />
+          <Route path='/artist/:creator' render={(props) => (
+            <ArtistInfo properties={props} />
           )} />
         </Switch>
         <AudioPlayer onTrackChange={trackObject => this.handleOnTrackChange(trackObject)} fullResponse={this.state.fullResponse} show={this.state.currentShow} track={this.state.currentTrack} />

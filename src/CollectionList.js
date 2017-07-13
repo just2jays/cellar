@@ -11,6 +11,7 @@ class CollectionList extends React.Component {
                     <CollectionListRow
                         key={show.identifier}
                         identifier={show.identifier}
+                        creator={show.creator}
                         title={show.title}
                         downloads={show.downloads}
                     />
@@ -22,7 +23,8 @@ class CollectionList extends React.Component {
                 <Table selectable>
                     <Table.Header>
                         <Table.Row>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Show</Table.HeaderCell>
+                        <Table.HeaderCell>Artist</Table.HeaderCell>
                         <Table.HeaderCell>Downloads</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
