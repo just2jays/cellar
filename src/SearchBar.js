@@ -11,7 +11,6 @@ class SearchBar extends React.Component {
         activeItem: "home"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
   }
 
   handleInputChange(event) {
@@ -28,17 +27,11 @@ class SearchBar extends React.Component {
     }
   }
 
-  handleMenuItemClick(event){
-    this.setState({ activeItem: event.target.name });
-  } 
-
   render() {
     return (
         <Container className='top-search-menu'>
           <Menu pointing secondary>
-            <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleMenuItemClick} />
-            <Menu.Item name='messages' active={this.state.activeItem === 'messages'} onClick={this.handleMenuItemClick} />
-            <Menu.Item name='friends' active={this.state.activeItem === 'friends'} onClick={this.handleMenuItemClick} />
+            <Menu.Item name='home' active={true} />
             <Menu.Menu position='right'>
               <Menu.Item>
                 <Input icon='search' placeholder='Search...' onChange={this.handleInputChange} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Image, Rating } from 'semantic-ui-react';
+import { Grid, Divider, Label, Segment, List, Container, Header, Image, Rating } from 'semantic-ui-react';
 import FavoriteButton from './FavoriteButton';
 
 var _ = require('lodash');
@@ -12,6 +12,17 @@ class ArtistInfo extends React.Component {
             creatorInfo: {
                 artist: {
                     name: "",
+                    similar: {
+                        artist: {
+                            name: "",
+                            image:[
+                                {
+                                    "#text": "",
+                                    "size": "medium"
+                                }
+                            ],
+                        }
+                    },
                     image:[
                         {
                             "#text": "",
@@ -73,6 +84,19 @@ class ArtistInfo extends React.Component {
     }
 
     render() {
+        var rows = [];
+        if(this.state.creatorInfo.artist.similar.artist.length > 0){
+            this.state.creatorInfo.artist.similar.artist.forEach(function(artist, index) {
+                rows.push(
+                    <List.Item key={index}>
+                        <Image avatar src={_.find(artist.image, {'size':'medium'})['#text']} />
+                        <List.Content>
+                            <List.Header as='a'>{artist.name}</List.Header>
+                        </List.Content>
+                    </List.Item>
+                );
+            });
+        }
         return (
             <Container className="artist-info">
                 <Header as='h2' icon textAlign='center'>
@@ -81,7 +105,31 @@ class ArtistInfo extends React.Component {
                          {this.state.creatorInfo.artist.name}
                     </Header.Content>
                 </Header>
-                <FavoriteButton onHandleFavorite={favorite => this.handleFavorite(favorite)} favorite={this.state.isFavorite} />
+                <Divider />
+                <Container textAlign='center'>
+                    <FavoriteButton onHandleFavorite={favorite => this.handleFavorite(favorite)} favorite={this.state.isFavorite} />
+                </Container>
+                <Divider hidden='true' />
+                <Grid columns={2}>
+                    <Grid.Column>
+                        <Segment raised>
+                            <Label as='a' color='red' ribbon>Overview</Label>
+                            <div>
+                                {this.state.creatorInfo.artist.bio.summary}
+                            </div>
+                        </Segment>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Segment>
+                            <Label as='a' color='orange' ribbon='right'>Similar Artists</Label>
+                            <div>
+                                <List>
+                                    {rows}
+                                </List>
+                            </div>
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
             </Container>
         );
     }

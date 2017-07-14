@@ -22,6 +22,11 @@ class App extends React.Component {
       this.handleOnTrackChange = this.handleOnTrackChange.bind(this);
   }
 
+  componentDidMount() {
+    var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    this.handleSearchChange(favorites.join(' OR '));
+  }
+
   handleSearchChange(term) {
     fetch('/collection/'+term)
     .then(response => response.json())
