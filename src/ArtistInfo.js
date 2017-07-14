@@ -41,6 +41,7 @@ class ArtistInfo extends React.Component {
                     isFavorite: true
                 });
             }
+            console.log(this.state);
         });
 
         // Check local storage if favorite
@@ -48,32 +49,27 @@ class ArtistInfo extends React.Component {
 
     checkFavorite() {
         var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        if( favorites.indexOf(this.props.artist ) >= 0) {
+        if( favorites.indexOf(this.state.creatorInfo.artist.name ) >= 0) {
+            console.log('yeah we have that here');
+            this.setState({
+                isFavorite: true
+            });
             return true;
         }else{
+            console.log('no sign of it...');
             return false;
         }
     }
 
-    handleFavorite() {
+    handleFavorite(favo) {
         var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        if(!this.state.isFavorite) {
-            // favorites.push(this.state.artist);
-            // localStorage.setItem('favorites', JSON.stringify(favorites));
-            console.log('add to favorites!');
-            this.setState({
-                isFavorite: true
-            });
+        if(favo) {
+            _.remove(favorites, _.bind(function(artist){return artist == this.state.creatorInfo.artist.name}, this));
+            localStorage.setItem('favorites', JSON.stringify(favorites));
         }else{
-            // _.remove(favorites, _.bind(function(artist){return artist == this.state.artist}, this));
-            // localStorage.setItem('favorites', JSON.stringify(favorites));
-            console.log('remove from favorites...');
-            this.setState({
-                isFavorite: true
-            });
+            favorites.push(this.state.creatorInfo.artist.name);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
         }
-
-        
     }
 
     render() {

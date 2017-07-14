@@ -4,36 +4,33 @@ import { Button } from 'semantic-ui-react';
 class CollectionListRow extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            color: ''
+        this.state = {}
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.favorite){
+            this.setState({
+                active: true
+            });
         }
-        this.handleFavorite = this.handleFavorite.bind(this);
     }
 
-    componentDidMount() {
-        console.log(this.props);
-        if(this.props.favorite){
-            this.setState({
-                color: 'red'
-            });
-        }else{
-            this.setState({
-                color: ''
-            });
-        }       
-    }
-
-    handleFavorite() {        
-        this.props.onHandleFavorite();
+    handleClick() {
+        this.setState({
+            active: !this.state.active
+        });
+        
+        this.props.onHandleFavorite(this.state.active);
     }
 
     render() {
+        const { active } = this.state;
+
         return (
-            <Button
-                color={this.state.color}
+            <Button color={active ? 'red' : ''} active={active} onClick={this.handleClick}
                 content='Favorite'
                 icon='heart'
-                onClick={this.handleFavorite}
             />
         );
     }

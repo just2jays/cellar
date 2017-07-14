@@ -28,10 +28,6 @@ class ShowList extends React.Component {
                 }
             });
 
-            // this.setState({
-            //     showImage: json.misc.image,
-            //     tracks: mp3Tracks
-            // });
             this.setState({
                 showData: json,
                 tracks: mp3Tracks
@@ -41,21 +37,6 @@ class ShowList extends React.Component {
 
 handleTrackChange(trackId) {
     var newTrack = _.find(this.state.tracks, function(track) { return track.track == trackId; });
-    // var newTrack = _.find(this.state.tracks, function(track) { return track.track == trackId; });
-    // var trackFile = newTrack.original.substr(0, newTrack.original.lastIndexOf('.'));
-    // var newTrackInfo = {
-    //     trackTitle: newTrack.title,
-    //     trackArtist: newTrack.creator,
-    //     trackFile: "https://archive.org/download/"+this.props.properties.match.params.identifier+"/"+trackFile+".mp3",
-    //     showImage: this.state.showImage
-    // };
-
-    // var mp3Tracks = [];
-    // _.values(this.showData.files).forEach(function(track) {
-    //     if ( track.format == 'VBR MP3' ) {
-    //         mp3Tracks.push(track);
-    //     }
-    // });
     
     var playerObject = {
         fullShowResponse: this.state.showData,
