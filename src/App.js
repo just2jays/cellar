@@ -24,7 +24,11 @@ class App extends React.Component {
 
   componentDidMount() {
     var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    this.handleSearchChange(favorites.join(' OR '));
+    var parsedFavs = [];
+    _.each(favorites, function(fav){
+      parsedFavs.push("\""+fav+"\"");
+    });
+    this.handleSearchChange(parsedFavs.join(' OR '));
   }
 
   handleSearchChange(term) {
