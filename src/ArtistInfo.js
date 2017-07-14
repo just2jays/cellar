@@ -91,7 +91,7 @@ class ArtistInfo extends React.Component {
                     <List.Item key={index}>
                         <Image avatar src={_.find(artist.image, {'size':'medium'})['#text']} />
                         <List.Content>
-                            <List.Header as='a'>{artist.name}</List.Header>
+                            <List.Header>{artist.name}</List.Header>
                         </List.Content>
                     </List.Item>
                 );
@@ -114,19 +114,19 @@ class ArtistInfo extends React.Component {
                     <Grid.Column>
                         <Segment raised>
                             <Label as='a' color='red' ribbon>Overview</Label>
-                            <div>
-                                {this.state.creatorInfo.artist.bio.summary}
-                            </div>
+                            <Segment vertical>
+                                {this.state.creatorInfo.artist.bio.summary.replace(/<{1}[^<>]{1,}>{1}/g," ").replace("Read more on Last.fm", "")}
+                            </Segment>
                         </Segment>
                     </Grid.Column>
                     <Grid.Column>
                         <Segment>
                             <Label as='a' color='orange' ribbon='right'>Similar Artists</Label>
-                            <div>
+                            <Segment vertical>
                                 <List>
                                     {rows}
                                 </List>
-                            </div>
+                            </Segment>
                         </Segment>
                     </Grid.Column>
                 </Grid>
