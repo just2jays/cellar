@@ -11,6 +11,7 @@ class SearchBar extends React.Component {
         activeItem: "home"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.goHome = this.goHome.bind(this);
   }
 
   handleInputChange(event) {
@@ -27,11 +28,15 @@ class SearchBar extends React.Component {
     }
   }
 
+  goHome() {
+    this.props.history.push('/');
+  }
+
   render() {
     return (
         <Container className='top-search-menu'>
           <Menu pointing secondary>
-            <Menu.Item name='home' active={true} />
+            <Menu.Item name='home' onClick={this.goHome} active={true} />
             <Menu.Menu position='right'>
               <Menu.Item>
                 <Input icon='search' placeholder='Search...' onChange={this.handleInputChange} />
