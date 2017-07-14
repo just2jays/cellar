@@ -52,22 +52,17 @@ class ArtistInfo extends React.Component {
                     isFavorite: true
                 });
             }
-            console.log(this.state);
         });
-
-        // Check local storage if favorite
     }
 
     checkFavorite() {
         var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         if( favorites.indexOf(this.state.creatorInfo.artist.name ) >= 0) {
-            console.log('yeah we have that here');
             this.setState({
                 isFavorite: true
             });
             return true;
         }else{
-            console.log('no sign of it...');
             return false;
         }
     }
@@ -109,7 +104,7 @@ class ArtistInfo extends React.Component {
                 <Container textAlign='center'>
                     <FavoriteButton onHandleFavorite={favorite => this.handleFavorite(favorite)} favorite={this.state.isFavorite} />
                 </Container>
-                <Divider hidden='true' />
+                <Divider hidden={true} />
                 <Grid columns={2}>
                     <Grid.Column>
                         <Segment raised>

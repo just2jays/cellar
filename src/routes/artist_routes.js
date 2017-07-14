@@ -8,7 +8,7 @@ module.exports = function(app, db) {
 
     app.get('/artist/:name', (req, res) => {
         request({
-            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+req.params.name+'&api_key='+lastfmConfig.API_KEY+'&format=json',
+            url: 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='+encodeURIComponent(req.params.name)+'&api_key='+lastfmConfig.API_KEY+'&format=json',
             headers: {
                 'user-agent': 'node.js',
             },
