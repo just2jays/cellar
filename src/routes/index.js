@@ -1,9 +1,9 @@
-const collectionRoutes = require('./collection_routes');
-const showRoutes = require('./show_routes');
-const artistRoutes = require('./artist_routes');
+import Error from 'Pages/Error';
+import Home from 'Pages/Home';
+import Todos from 'Pages/Todos';
 
-module.exports = function(app, db) {
-  collectionRoutes(app, db);
-  showRoutes(app, db);
-  artistRoutes(app, db);
-};
+export default [
+  { path: '/', exact: true, component: Home },
+  { path: '/todos', exact: true, component: Todos },
+  { path: '*', component: Error }
+];

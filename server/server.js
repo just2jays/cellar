@@ -6,6 +6,7 @@ const app = express();
 const compiler = webpack(webpackConfig);
 const bodyParser = require('body-parser');
 const request = require('request');
+const Api = require ('./api');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -21,12 +22,5 @@ const server = app.listen(3000, function() {
 
 app.use(express.static(__dirname + '/public'));
  
-app.use(webpackDevMiddleware(compiler, {
-  hot: true,
-  filename: 'bundle.js',
-  publicPath: '/',
-  stats: {
-    colors: true,
-  },
-  historyApiFallback: true,
-}));
+// Mount the REST API
+app.use('/api', Api);
