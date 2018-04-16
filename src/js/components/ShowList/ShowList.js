@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Table } from 'semantic-ui-react';
-import ShowListRow from './ShowListRow';
+import ShowListRow from './ShowListRow/ShowListRow';
 
 var _ = require('lodash');
 

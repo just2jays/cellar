@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchBar from './SearchBar';
+import SearchBar from 'Components/common/SearchBar/SearchBar';
 import { Switch, Route } from 'react-router-dom';
-import CollectionList from './CollectionList';
-import ShowList from './ShowList';
-import AudioPlayer from './AudioPlayer';
-import ArtistInfo from './ArtistInfo';
+import CollectionList from 'Components/CollectionList/CollectionList';
+import ShowList from 'Components/ShowList/ShowList';
+import AudioPlayer from 'Components/AudioPlayer/AudioPlayer';
+import ArtistInfo from 'Components/ArtistInfo/ArtistInfo';
 
 class App extends React.Component {
   constructor() {
@@ -32,8 +32,14 @@ class App extends React.Component {
   }
 
   handleSearchChange(term) {
+    if(term === ""){
+      return true;
+    }
+
     fetch('/collection/'+term)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      response.json()})
     .then(json => {
         this.setState({
             shows: json.response.docs
@@ -64,6 +70,7 @@ handleTrackChange(trackObject) {
 }
 
   render() {
+
     return (
       <div id="outer-container" style={{height: '100%'}}>
         <SearchBar onSearchChange={term => this.handleSearchChange(term)} />

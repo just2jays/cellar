@@ -1,8 +1,7 @@
 import React from 'react';
 import { Grid, Divider, Label, Segment, List, Container, Header, Image, Rating } from 'semantic-ui-react';
-import FavoriteButton from './FavoriteButton';
-
-var _ = require('lodash');
+import FavoriteButton from 'Components/common/FavoriteButton/FavoriteButton';
+import { find, remove } from 'lodash';
 
 class ArtistInfo extends React.Component {
     constructor() {
@@ -70,7 +69,7 @@ class ArtistInfo extends React.Component {
     handleFavorite(favo) {
         var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         if(favo) {
-            _.remove(favorites, _.bind(function(artist){return artist == this.state.creatorInfo.artist.name}, this));
+            remove(favorites, _.bind(function(artist){return artist == this.state.creatorInfo.artist.name}, this));
             localStorage.setItem('favorites', JSON.stringify(favorites));
         }else{
             favorites.push(this.state.creatorInfo.artist.name);

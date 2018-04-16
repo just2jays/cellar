@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Table } from 'semantic-ui-react';
-import CollectionListRow from './CollectionListRow';
+import CollectionListRow from './CollectionListRow/CollectionListRow';
 
 class CollectionList extends React.Component {
     render() {

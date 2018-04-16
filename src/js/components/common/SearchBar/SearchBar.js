@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Container, Input } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import CollectionList from './CollectionList';
+import CollectionList from 'Components/CollectionList/CollectionList';
 
 class SearchBar extends React.Component {
   constructor() {

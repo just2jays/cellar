@@ -10,6 +10,9 @@ const request = require('request');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const routes = require('./src/routes')(app, {});
+
+console.log(routes);
+
 const server = app.listen(3000, function() {
   const host = server.address().address;
   const port = server.address().port;

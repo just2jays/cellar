@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactHowler from 'react-howler';
 import { Divider, Container, Button, Grid, Progress } from 'semantic-ui-react';
-import './main.scss';
 
 class AudioPlayer extends React.Component {
   constructor(props) {

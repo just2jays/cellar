@@ -6,6 +6,7 @@ module.exports = function(app, db) {
     });
 
     app.get('/collection/:name', (req, res) => {
+        console.log('THIS FAR!!!!');
         request({
             url: 'https://archive.org/advancedsearch.php?q=collection%3A%28etree%29format%3A%28VBR+MP3%29creator%3A%28'+encodeURIComponent(req.params.name)+'%29&sort%5B%5D=date+desc&output=json',
             headers: {
