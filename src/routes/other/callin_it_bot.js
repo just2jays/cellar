@@ -24,14 +24,10 @@ function getTotalCount(message, callback) {
     });
 }
 
-module.exports = function(app, db) {
-    app.get('/callinit', (req, res) => {
-        client.on("message", message => {
-            if(message.content == "!callinit") {
-              getTotalCount(message, postToSlack);
-            }
-          });
-          
-          client.login(config.discord.TOKEN);
-    });
-};
+client.on("message", message => {
+    if(message.content == "!callinit") {
+      getTotalCount(message, postToSlack);
+    }
+  });
+  
+client.login(config.discord.TOKEN);
