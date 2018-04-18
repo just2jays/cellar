@@ -7,5 +7,4 @@ module.exports = function(app, db) {
   collectionRoutes(app, db);
   showRoutes(app, db);
   artistRoutes(app, db);
-  callin_it_bot(app, db);
 };
