@@ -2,7 +2,6 @@ var config = require('../../../config/config.js');
 var request = require('request');
 var Discord = require("discord.js");
 
-var app = express();
 var client = new Discord.Client;
 
 function sendMessage(message, content) {
