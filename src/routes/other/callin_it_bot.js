@@ -32,6 +32,6 @@ module.exports = function(app, db) {
             }
           });
           
-          client.login(config.discordConfig.TOKEN);
+          client.login(config.discord.TOKEN);
     });
 };
