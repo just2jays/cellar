@@ -17,6 +17,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.17.2",
+    "discord.js": "^11.3.2",
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
