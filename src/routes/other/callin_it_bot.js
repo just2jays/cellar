@@ -6,9 +6,7 @@ var _ = require("lodash");
 var client = new Discord.Client;
 
 function sendMessage(message, content) {
-    message.reply(content,{
-        reply: 'test'
-    });
+    message.reply(content);
 }
 
 function postToSlack(message, url) {
