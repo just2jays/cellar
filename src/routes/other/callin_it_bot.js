@@ -5,8 +5,13 @@ var _ = require("lodash");
 
 var client = new Discord.Client;
 
-function sendMessage(message, content) {
-    message.reply(content);
+function sendMessage(message, content, asMention = true) {
+    if(asMention) {
+        message.reply(content);
+    }else{
+        message.channel.send(content);
+    }
+    
 }
 
 function postToSlack(message, url) {
@@ -21,9 +26,8 @@ function postRollToDiscord(message, text) {
 }
 
 function postSlotsToDiscord(message, result) {
-    sendMessage(message, result.visualResults);
+    sendMessage(message, result.visualResults, false);
     sendMessage(message, result.textResults);
-    message.channel.send("pong!");
 }
 
 /*
