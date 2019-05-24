@@ -7,7 +7,7 @@ var client = new Discord.Client;
 
 function sendMessage(message, content) {
     message.reply(content,{
-        reply: ''
+        reply: 'test'
     });
 }
 
