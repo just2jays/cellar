@@ -42,19 +42,19 @@ function getTotalCount(message, callback) {
  */
 function spinTheWheel(message, callback) {
     var emojiArray = [
-        ':ceevee:',
-        ':patty:',
-        ':liljim:',
-        ':bigjim:',
-        ':jdstare:',
-        ':jdtongue:',
-        ':palevan:',
-        ':babymic:',
-        ':lorbs:',
-        ':vanwink:',
-        ':vanimal:',
-        ':thebaby:',
-        ':howie:'
+        '<:ceevee:576146714084507660>',
+        '<:patty:571388280952717314>',
+        '<:liljim:571387346503598099>',
+        '<:bigjim:571387291843428352>',
+        '<:jdstare:571387196276211723>',
+        '<:jdtongue:571386881447559324>',
+        '<:palevan:557638375641841666>',
+        '<:babymic:553685330994135080>',
+        '<:lorbs:535867144169062400>',
+        '<:vanwink:525011879119028227>',
+        '<:vanimal:524702569541402654>',
+        '<:thebaby:524695266813542423>',
+        '<:howie:490214575363588107>'
     ];
 
     var winningSpin = false;
@@ -74,14 +74,12 @@ function spinTheWheel(message, callback) {
 
     if(winningSpin){
         var resultObject = {
-            // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
-            visualResults: "<:lorbs:535867144169062400>",
+            visualResults: "| "+wheel1+" | "+wheel2+" | "+wheel3+" |",
             textResults: ":cherries: JACKPOT!!"
         }
     }else{
         var resultObject = {
-            // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
-            visualResults: "<:lorbs:535867144169062400>",
+            visualResults: "| "+wheel1+" | "+wheel2+" | "+wheel3+" |",
             textResults: ":cherries: better luck next time!!"
         }
     }
