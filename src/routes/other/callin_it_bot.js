@@ -75,7 +75,7 @@ function spinTheWheel(message, callback) {
     if(winningSpin){
         var resultObject = {
             // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
-            visualResults: wheel1,
+            visualResults: ":lorbs:535867144169062400",
             textResults: ":cherries: JACKPOT!!"
         }
     }else{
