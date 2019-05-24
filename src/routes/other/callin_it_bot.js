@@ -23,6 +23,7 @@ function postRollToDiscord(message, text) {
 function postSlotsToDiscord(message, result) {
     sendMessage(message, result.visualResults);
     sendMessage(message, result.textResults);
+    message.channel.send("pong!");
 }
 
 /*
