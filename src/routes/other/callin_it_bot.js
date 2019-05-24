@@ -81,7 +81,7 @@ function spinTheWheel(message, callback) {
     }else{
         var resultObject = {
             // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
-            visualResults: wheel2,
+            visualResults: ":lorbs:535867144169062400",
             textResults: ":cherries: better luck next time!!"
         }
     }
