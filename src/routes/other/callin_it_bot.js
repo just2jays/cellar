@@ -74,12 +74,14 @@ function spinTheWheel(message, callback) {
 
     if(winningSpin){
         var resultObject = {
-            visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
+            // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
+            visualResults: wheel1,
             textResults: ":cherries: JACKPOT!!"
         }
     }else{
         var resultObject = {
-            visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
+            // visualResults: "| "+wheel1+" \|\| "+wheel2+" \|\| "+wheel3+" |",
+            visualResults: wheel2,
             textResults: ":cherries: better luck next time!!"
         }
     }
