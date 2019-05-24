@@ -65,26 +65,20 @@ function spinTheWheel(message, callback) {
     var winningSpin = false;
     var spinResult = [];
 
-    var wheel1 = _.sample(emojiArray);
-    var wheel2 = _.sample(emojiArray);
-    var wheel3 = _.sample(emojiArray);
-
-    spinResult.push(wheel1);
-    if(spinResult.indexOf(wheel2) > -1){
-        spinResult.push(wheel2);
-    }
-    if(spinResult.indexOf(wheel3) > -1){
-        winningSpin = true;
+    for (i=1; i<= 3; i++){
+        spinResult.push(_.sample(emojiArray));
     }
 
-    if(winningSpin){
+    if(_.uniq(spinResult).length == 1){
+        // WIN
         var resultObject = {
-            visualResults: wheel1+" "+wheel2+" "+wheel3,
+            visualResults: spinResult.join(" "),
             textResults: ":moneybag: JACKPOT!"
         }
     }else{
+        // LOSE
         var resultObject = {
-            visualResults: wheel1+" "+wheel2+" "+wheel3,
+            visualResults: spinResult.join(" "),
             textResults: ":cherries: Better luck next time..."
         }
     }
