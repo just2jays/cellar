@@ -40,7 +40,7 @@ function getTotalCount(message, callback) {
 /*
  * SLOTS BOT
  */
-spinTheWheel(message, callback) {
+function spinTheWheel(message, callback) {
     var emojiArray = [
         ':ceevee:',
         ':patty:',
