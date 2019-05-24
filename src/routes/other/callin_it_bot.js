@@ -80,12 +80,12 @@ function spinTheWheel(message, callback) {
     if(winningSpin){
         var resultObject = {
             visualResults: wheel1+" "+wheel2+" "+wheel3,
-            textResults: ":cherries: JACKPOT!!"
+            textResults: ":moneybag: JACKPOT!"
         }
     }else{
         var resultObject = {
             visualResults: wheel1+" "+wheel2+" "+wheel3,
-            textResults: ":cherries: better luck next time!!"
+            textResults: ":cherries: Better luck next time..."
         }
     }
 
