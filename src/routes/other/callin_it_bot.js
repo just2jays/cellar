@@ -20,6 +20,11 @@ function postRollToDiscord(message, text) {
     sendMessage(message, text)
 }
 
+function postSlotsToDiscord(message, result) {
+    sendMessage(message, result.visualResults);
+    sendMessage(message, result.textResults);
+}
+
 /*
  * CALLIN IT BOT FUNCTION
  */
@@ -30,6 +35,56 @@ function getTotalCount(message, callback) {
         var offset = Math.floor(Math.random() * (allposts - 0) + 0);
         callback(message, "http://api.tumblr.com/v2/blog/imcallinit.tumblr.com/posts?api_key=bQLV4Cnl5qRFGhHT7cn23k7YXAkmxnZpKCM2eLLFE3kARBi9LD&offset=" + offset + "&limit=1");
     });
+}
+
+/*
+ * SLOTS BOT
+ */
+spinTheWheel(message, callback) {
+    var emojiArray = [
+        ':ceevee:',
+        ':patty:',
+        ':liljim:',
+        ':bigjim:',
+        ':jdstare:',
+        ':jdtongue:',
+        ':palevan:',
+        ':babymic:',
+        ':lorbs:',
+        ':vanwink:',
+        ':vanimal:',
+        ':thebaby:',
+        ':howie:'
+    ];
+
+    var winningSpin = false;
+    var spinResult = [];
+
+    var wheel1 = _.sample(emojiArray);
+    var wheel2 = _.sample(emojiArray);
+    var wheel3 = _.sample(emojiArray);
+
+    spinResult.push(wheel1);
+    if(spinResult.indexOf(wheel2) > -1){
+        spinResult.push(wheel2);
+    }
+    if(spinResult.indexOf(wheel3) > -1){
+        winningSpin = true;
+    }
+
+    if(winningSpin){
+        var resultObject = {
+            visualResults: "| "+wheel1+" || "+wheel2+" || "+wheel3+" |",
+            textResults: ":cherries: JACKPOT!!"
+        }
+    }else{
+        var resultObject = {
+            visualResults: "| "+wheel1+" || "+wheel2+" || "+wheel3+" |",
+            textResults: ":cherries: better luck next time!!"
+        }
+    }
+
+    callback(message, resultObject);
 }
 
 /*
@@ -97,6 +152,9 @@ client.on("message", message => {
     }
     if(message.content == "!rollin") {
         rollTheDice(message, postRollToDiscord);
+    }
+    if(message.content == "!slots") {
+        spinTheWheel(message, postSlotsToDiscord);
     }
 });
 
