@@ -109,7 +109,7 @@ function spinTheWheel(message, callback) {
             amount: userCurrentMoneys+10,
             wins: 0
           }
-          // slotsScore.set(newUserScore);
+          slotsScore.set(newUserScore);
       }else{
           // LOSE
           var resultObject = {
@@ -121,7 +121,7 @@ function spinTheWheel(message, callback) {
             amount: userCurrentMoneys-1,
             wins: 0
           }
-          // slotsScore.set(newUserScore);
+          slotsScore.set(newUserScore);
       }
   
       callback(message, resultObject);
