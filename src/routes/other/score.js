@@ -162,6 +162,7 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
+  console.log(">>>>>",message);
   if(message.content == "!callinit") {
       getTotalCount(message, postToSlack);
   }
