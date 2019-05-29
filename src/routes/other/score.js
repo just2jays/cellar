@@ -62,8 +62,8 @@ function spinTheWheel(message, callback) {
   var userCurrentMoneys = undefined;
   var userRef = slotsScore.child(message.author.username);
   userRef.once("value", function(snapshot) {
-    console.log('🔥🔥🔥🔥 snapshot 🔥🔥🔥🔥', '\n', snapshot);
     snapshot.forEach(function(child) {
+      console.log('🔥🔥🔥🔥 childs 🔥🔥🔥🔥', '\n', child);
       console.log(child.key+": "+child.val());
       if(child.key === "amount"){
         console.log("amount===="+child.val());
