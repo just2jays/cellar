@@ -146,12 +146,6 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
-    if(message.content == "!callinit") {
-        getTotalCount(message, postToSlack);
-    }
-    if(message.content == "!rollin") {
-        rollTheDice(message, postRollToDiscord);
-    }
     if(message.content == "!slots") {
         spinTheWheel(message, postSlotsToDiscord);
     }
