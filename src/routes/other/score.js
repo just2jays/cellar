@@ -58,21 +58,28 @@ function getTotalCount(message, callback) {
 function spinTheWheel(message, callback) {
 
   var newUserScore = {};
-  newUserScore[message.author.username] = {
-    amount: 100,
-    wins: 0
-  }
 
 //----
+var userCurrentMoneys = undefined;
 var userRef = slotsScore.child(message.author.username);
 userRef.once("value", function(snapshot) {
   snapshot.forEach(function(child) {
-    console.log(child.key+": "+child.val());
+    if(child.key === "amount"){
+      userCurrentMoneys = child.val();
+    }
+    // console.log(child.key+": "+child.val());
   });
 });
+
+if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
+  callback(message, {
+    visualResults: "------",
+    textResults: "...sorry you're out of cash"
+  });
+}
 //----
 
-  slotsScore.set(newUserScore);
+  // slotsScore.set(newUserScore);
 
     var emojiArray = [
         '<:ceevee:576146714084507660>',
@@ -103,12 +110,23 @@ userRef.once("value", function(snapshot) {
             visualResults: spinResult.join(" "),
             textResults: ":moneybag: JACKPOT!"
         }
+        newUserScore[message.author.username] = {
+          amount: userCurrentMoneys+10,
+          wins: 0
+        }
+        slotsScore.set(newUserScore);
     }else{
         // LOSE
         var resultObject = {
             visualResults: spinResult.join(" "),
             textResults: ":cherries: Better luck next time..."
         }
+
+        newUserScore[message.author.username] = {
+          amount: userCurrentMoneys-1,
+          wins: 0
+        }
+        slotsScore.set(newUserScore);
     }
 
     callback(message, resultObject);
