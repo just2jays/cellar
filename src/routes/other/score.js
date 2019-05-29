@@ -56,7 +56,7 @@ function getTotalCount(message, callback) {
  * SLOTS BOT
  */
 function spinTheWheel(message, callback) {
-  console.log(message.author.User);
+  console.log(message.author['User']);
   var newUserScore = {};
   newUserScore[message.author.User.username] = {
     amount: 100,
