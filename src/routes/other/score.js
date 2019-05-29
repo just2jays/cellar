@@ -120,7 +120,7 @@ if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
           amount: userCurrentMoneys+10,
           wins: 0
         }
-        slotsScore.set(newUserScore);
+        // slotsScore.set(newUserScore);
     }else{
         // LOSE
         var resultObject = {
@@ -132,7 +132,7 @@ if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
           amount: userCurrentMoneys-1,
           wins: 0
         }
-        slotsScore.set(newUserScore);
+        // slotsScore.set(newUserScore);
     }
 
     callback(message, resultObject);
