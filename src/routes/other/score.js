@@ -63,7 +63,13 @@ function spinTheWheel(message, callback) {
   var userRef = slotsScore.child(message.author.username);
   console.log('🔥🔥🔥🔥 userRef 🔥🔥🔥🔥', '\n', userRef);
   userRef.once("value", function(snapshot) {
-    
+    if(!snapshot.exists()){
+      newUserScore[message.author.username] = {
+        amount: 100,
+        wins: 0
+      }
+      slotsScore.set(newUserScore);
+    }
     snapshot.forEach(function(child) {
       
       console.log(child.key+": "+child.val());
