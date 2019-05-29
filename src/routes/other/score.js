@@ -4,10 +4,6 @@ var Discord = require("discord.js");
 var firebaseAdmin = require('firebase-admin');
 var _ = require("lodash");
 
-
-module.exports = function(app, db) {
-  app.get('/slots', (req, res) => {
-      console.log("first");
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
   databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
@@ -16,14 +12,9 @@ firebaseAdmin.initializeApp({
 var firebaseDB = firebaseAdmin.database();
 var slotsRef = firebaseDB.ref("mvslots");
 var slotsScore = slotsRef.child("stats");
-slotsScore.set({
-  secondScore: {
-      amount: 100,
-      wins: 0
-  }
-});
-console.log(slotsScore);
-res.send("hahaha");
+
+module.exports = function(app, db) {
+  app.get('/slots', (req, res) => {
 
 var client = new Discord.Client;
 
@@ -104,6 +95,9 @@ function spinTheWheel(message, callback) {
           textResults: ":cherries: Better luck next time..."
       }
   }
+
+  console.log('🔥🔥🔥🔥 the message sir 🔥🔥🔥🔥', '\n', );
+  console.log(message);
 
   callback(message, resultObject);
 }
