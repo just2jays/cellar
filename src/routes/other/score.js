@@ -73,6 +73,11 @@ function spinTheWheel(message, callback) {
         amount: 100,
         wins: 0
       })
+      callback(message, {
+        visualResults: "------",
+        textResults: "You have 100 coins in the back! Trigger `!slots` to start playing!"
+      });
+      return false;
     }
     snapshot.forEach(function(child) {
       
