@@ -79,6 +79,8 @@ if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
 }
 //----
 
+console.log("------>"+userCurrentMoneys);
+
   // slotsScore.set(newUserScore);
 
     var emojiArray = [
