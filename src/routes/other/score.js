@@ -64,11 +64,16 @@ function spinTheWheel(message, callback) {
   console.log('🔥🔥🔥🔥 userRef 🔥🔥🔥🔥', '\n', userRef);
   userRef.once("value", function(snapshot) {
     if(!snapshot.exists()){
-      newUserScore[message.author.username] = {
+      // newUserScore[message.author.username] = {
+      //   amount: 100,
+      //   wins: 0
+      // }
+      // slotsScore.set(newUserScore);
+      var newUserRef = slotsScore.child(message.author.username).push();
+      newUserRef.set({
         amount: 100,
         wins: 0
-      }
-      slotsScore.set(newUserScore);
+      })
     }
     snapshot.forEach(function(child) {
       
