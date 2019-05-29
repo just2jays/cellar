@@ -96,7 +96,7 @@ function spinTheWheel(message, callback) {
       }
   }
 
-  console.log('🔥🔥🔥🔥 the message sir 🔥🔥🔥🔥', '\n', );
+  console.log('🔥🔥🔥🔥 the message sir 🔥🔥🔥🔥');
   console.log(message);
 
   callback(message, resultObject);
