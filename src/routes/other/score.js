@@ -65,11 +65,14 @@ var userRef = slotsScore.child(message.author.username);
 userRef.once("value", function(snapshot) {
   snapshot.forEach(function(child) {
     if(child.key === "amount"){
+      console.log("amount===="+child.val());
       userCurrentMoneys = child.val();
     }
     // console.log(child.key+": "+child.val());
   });
 });
+
+console.log("------>"+userCurrentMoneys);
 
 if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
   callback(message, {
@@ -79,7 +82,7 @@ if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
 }
 //----
 
-console.log("------>"+userCurrentMoneys);
+
 
   // slotsScore.set(newUserScore);
 
