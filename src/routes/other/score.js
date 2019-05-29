@@ -59,83 +59,76 @@ function spinTheWheel(message, callback) {
 
   var newUserScore = {};
 
-//----
-var userCurrentMoneys = undefined;
-var userRef = slotsScore.child(message.author.username);
-userRef.once("value", function(snapshot) {
-  snapshot.forEach(function(child) {
-    console.log(child.key+": "+child.val());
-    if(child.key === "amount"){
-      console.log("amount===="+child.val());
-      userCurrentMoneys = child.val();
-    }
-    // console.log(child.key+": "+child.val());
+  var userCurrentMoneys = undefined;
+  var userRef = slotsScore.child(message.author.username);
+  userRef.once("value", function(snapshot) {
+    snapshot.forEach(function(child) {
+      console.log(child.key+": "+child.val());
+      if(child.key === "amount"){
+        console.log("amount===="+child.val());
+        userCurrentMoneys = child.val();
+      }
+
+      if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
+        callback(message, {
+          visualResults: "------",
+          textResults: "...sorry you're out of cash"
+        });
+      }
+  
+      var emojiArray = [
+          '<:ceevee:576146714084507660>',
+          '<:patty:571388280952717314>',
+          '<:liljim:571387346503598099>',
+          '<:bigjim:571387291843428352>',
+          '<:jdstare:571387196276211723>',
+          '<:jdtongue:571386881447559324>',
+          '<:palevan:557638375641841666>',
+          '<:babymic:553685330994135080>',
+          '<:lorbs:535867144169062400>',
+          '<:vanwink:525011879119028227>',
+          '<:vanimal:524702569541402654>',
+          '<:thebaby:524695266813542423>',
+          '<:howie:490214575363588107>'
+      ];
+  
+      var winningSpin = false;
+      var spinResult = [];
+  
+      for (i=1; i<= 3; i++){
+          spinResult.push(_.sample(emojiArray));
+      }
+  
+      if(_.uniq(spinResult).length == 1){
+          // WIN
+          var resultObject = {
+              visualResults: spinResult.join(" "),
+              textResults: ":moneybag: JACKPOT!"
+          }
+          newUserScore[message.author.username] = {
+            amount: userCurrentMoneys+10,
+            wins: 0
+          }
+          // slotsScore.set(newUserScore);
+      }else{
+          // LOSE
+          var resultObject = {
+              visualResults: spinResult.join(" "),
+              textResults: ":cherries: Better luck next time..."
+          }
+  
+          newUserScore[message.author.username] = {
+            amount: userCurrentMoneys-1,
+            wins: 0
+          }
+          // slotsScore.set(newUserScore);
+      }
+  
+      callback(message, resultObject);
+
+      // console.log(child.key+": "+child.val());
+    });
   });
-});
-
-console.log("------>"+userCurrentMoneys);
-
-if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
-  callback(message, {
-    visualResults: "------",
-    textResults: "...sorry you're out of cash"
-  });
-}
-//----
-
-
-
-  // slotsScore.set(newUserScore);
-
-    var emojiArray = [
-        '<:ceevee:576146714084507660>',
-        '<:patty:571388280952717314>',
-        '<:liljim:571387346503598099>',
-        '<:bigjim:571387291843428352>',
-        '<:jdstare:571387196276211723>',
-        '<:jdtongue:571386881447559324>',
-        '<:palevan:557638375641841666>',
-        '<:babymic:553685330994135080>',
-        '<:lorbs:535867144169062400>',
-        '<:vanwink:525011879119028227>',
-        '<:vanimal:524702569541402654>',
-        '<:thebaby:524695266813542423>',
-        '<:howie:490214575363588107>'
-    ];
-
-    var winningSpin = false;
-    var spinResult = [];
-
-    for (i=1; i<= 3; i++){
-        spinResult.push(_.sample(emojiArray));
-    }
-
-    if(_.uniq(spinResult).length == 1){
-        // WIN
-        var resultObject = {
-            visualResults: spinResult.join(" "),
-            textResults: ":moneybag: JACKPOT!"
-        }
-        newUserScore[message.author.username] = {
-          amount: userCurrentMoneys+10,
-          wins: 0
-        }
-        // slotsScore.set(newUserScore);
-    }else{
-        // LOSE
-        var resultObject = {
-            visualResults: spinResult.join(" "),
-            textResults: ":cherries: Better luck next time..."
-        }
-
-        newUserScore[message.author.username] = {
-          amount: userCurrentMoneys-1,
-          wins: 0
-        }
-        // slotsScore.set(newUserScore);
-    }
-
-    callback(message, resultObject);
 }
 
 /*
