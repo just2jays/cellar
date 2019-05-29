@@ -74,6 +74,7 @@ function spinTheWheel(message, callback) {
           visualResults: "------",
           textResults: "...sorry you're out of cash"
         });
+        return false;
       }
   
       var emojiArray = [
