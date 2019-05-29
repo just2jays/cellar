@@ -65,8 +65,8 @@ function spinTheWheel(message, callback) {
 
 //----
 slotsScore.on('value', function(snapshot) {
-  snapshot.forEach(function(childSnapshot, index) {
-    console.log(index);
+  console.log(snapshot);
+  snapshot.forEach(function(childSnapshot) {
     var childData = childSnapshot.val();
     console.log(childData);
   });
