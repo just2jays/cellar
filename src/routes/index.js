@@ -8,5 +8,5 @@ module.exports = function(app, db) {
   collectionRoutes(app, db);
   showRoutes(app, db);
   artistRoutes(app, db);
-  score_bot(app, db);
+  // score_bot(app, db);
 };
