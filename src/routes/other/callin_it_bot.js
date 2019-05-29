@@ -152,9 +152,9 @@ client.on("message", message => {
     if(message.content == "!rollin") {
         rollTheDice(message, postRollToDiscord);
     }
-    if(message.content == "!slots") {
-        spinTheWheel(message, postSlotsToDiscord);
-    }
+    // if(message.content == "!slots") {
+    //     spinTheWheel(message, postSlotsToDiscord);
+    // }
 });
 
 client.login(config.discord.TOKEN);
