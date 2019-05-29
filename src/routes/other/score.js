@@ -64,11 +64,10 @@ function spinTheWheel(message, callback) {
   }
 
 //----
-slotsScore.on('value', function(snapshot) {
-  console.log(snapshot);
-  snapshot.forEach(function(childSnapshot) {
-    var childData = childSnapshot.val();
-    console.log(childData);
+var userRef = slotsScore.child(message.author.username);
+userRef.once("value", function(snapshot) {
+  snapshot.forEach(function(child) {
+    console.log(child.key+": "+child.val());
   });
 });
 //----
