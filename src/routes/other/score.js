@@ -69,8 +69,7 @@ function spinTheWheel(message, callback) {
       //   wins: 0
       // }
       // slotsScore.set(newUserScore);
-      var newUserRef = slotsScore.child(message.author.username).push();
-      newUserRef.set({
+      var newUserRef = slotsScore.child(message.author.username).set({
         amount: 100,
         wins: 0
       })
