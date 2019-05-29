@@ -56,12 +56,22 @@ function getTotalCount(message, callback) {
  * SLOTS BOT
  */
 function spinTheWheel(message, callback) {
-  console.log(message.author.username);
+
   var newUserScore = {};
   newUserScore[message.author.username] = {
     amount: 100,
     wins: 0
   }
+
+//----
+slotsScore.on('value', function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var childData = childSnapshot.val();
+    console.log(childData);
+  });
+});
+//----
+
   slotsScore.set(newUserScore);
 
     var emojiArray = [
