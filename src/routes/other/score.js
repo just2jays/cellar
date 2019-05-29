@@ -104,7 +104,7 @@ function spinTheWheel(message, callback) {
             // WIN
             var resultObject = {
                 visualResults: spinResult.join(" "),
-                textResults: ":moneybag: JACKPOT! You now have "+userCurrentMoneys+10+" coins left."
+                textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+10)+" coins left."
             }
             newUserScore[message.author.username] = {
               amount: userCurrentMoneys+10,
@@ -115,7 +115,7 @@ function spinTheWheel(message, callback) {
           // 2 out of 3
           var resultObject = {
               visualResults: spinResult.join(" "),
-              textResults: ":money_mouth: So close! You now have "+userCurrentMoneys+3+" coins left."
+              textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+3)+" coins left."
           }
           newUserScore[message.author.username] = {
             amount: userCurrentMoneys+3,
@@ -126,7 +126,7 @@ function spinTheWheel(message, callback) {
             // LOSE
             var resultObject = {
                 visualResults: spinResult.join(" "),
-                textResults: ":cherries: Better luck next time...you have "+userCurrentMoneys-1+" coins left."
+                textResults: ":cherries: Better luck next time...you have "+(userCurrentMoneys-1)+" coins left."
             }
     
             newUserScore[message.author.username] = {
