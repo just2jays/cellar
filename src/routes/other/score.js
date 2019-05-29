@@ -1,7 +1,17 @@
 var config = require('../../../config/config.js');
 var request = require('request');
 var Discord = require("discord.js");
+var firebaseAdmin = require('firebase-admin');
 var _ = require("lodash");
+
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
+  databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
+});
+
+var firebaseDB = firebaseAdmin.database();
+var slotsRef = firebaseDB.ref("mvslots");
+var slotsScore = slotsRef.child("stats");
 
 var client = new Discord.Client;
 
@@ -46,6 +56,14 @@ function getTotalCount(message, callback) {
  * SLOTS BOT
  */
 function spinTheWheel(message, callback) {
+
+  var newUserScore = {};
+  newUserScore[message.author.User.username] = {
+    amount: 100,
+    wins: 0
+  }
+  slotsScore.set(newUserScore);
+
     var emojiArray = [
         '<:ceevee:576146714084507660>',
         '<:patty:571388280952717314>',
