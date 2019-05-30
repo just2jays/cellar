@@ -63,7 +63,6 @@ function spinTheWheel(message, callback) {
   var userRef = slotsScore.child(message.author.username);
   
   userRef.once("value", function(snapshot) {
-    console.log('🔥🔥🔥🔥 eh 🔥🔥🔥🔥', '\n', snapshot.exists());
     if(!snapshot.exists()){
       var newUserRef = slotsScore.child(message.author.username).set({
         amount: 100,
@@ -77,9 +76,8 @@ function spinTheWheel(message, callback) {
     }
     snapshot.forEach(function(child) {
       
-      console.log(child.key+": "+child.val());
       if(child.key === "amount"){
-        console.log("amount===="+child.val());
+
         userCurrentMoneys = child.val();
       
         if(typeof userCurrentMoneys === 'undefined' || userCurrentMoneys < 1){
@@ -119,10 +117,7 @@ function spinTheWheel(message, callback) {
                 visualResults: spinResult.join(" "),
                 textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+10)+" coins left."
             }
-            // newUserScore[message.author.username] = {
-            //   amount: userCurrentMoneys+10,
-            //   wins: 0
-            // }
+
             userRef.set({
               amount: userCurrentMoneys+10,
               wins: 0
@@ -133,10 +128,7 @@ function spinTheWheel(message, callback) {
               visualResults: spinResult.join(" "),
               textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+3)+" coins left."
           }
-          // newUserScore[message.author.username] = {
-          //   amount: userCurrentMoneys+3,
-          //   wins: 0
-          // }
+
           userRef.set({
             amount: userCurrentMoneys+3,
             wins: 0
@@ -148,10 +140,7 @@ function spinTheWheel(message, callback) {
                 textResults: ":cherries: Better luck next time...you have "+(userCurrentMoneys-1)+" coins left."
             }
     
-            // newUserScore[message.author.username] = {
-            //   amount: userCurrentMoneys-1,
-            //   wins: 0
-            // }
+
             userRef.set({
               amount: userCurrentMoneys-1,
               wins: 0
@@ -160,7 +149,7 @@ function spinTheWheel(message, callback) {
     
         callback(message, resultObject);
       }
-      // console.log(child.key+": "+child.val());
+
     });
   });
 }
