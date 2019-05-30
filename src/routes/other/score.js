@@ -119,22 +119,28 @@ function spinTheWheel(message, callback) {
                 visualResults: spinResult.join(" "),
                 textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+10)+" coins left."
             }
-            newUserScore[message.author.username] = {
+            // newUserScore[message.author.username] = {
+            //   amount: userCurrentMoneys+10,
+            //   wins: 0
+            // }
+            userRef.set({
               amount: userCurrentMoneys+10,
               wins: 0
-            }
-            userRef.set(newUserScore);
+            });
         }else if(_.uniq(spinResult).length == 2) {
           // 2 out of 3
           var resultObject = {
               visualResults: spinResult.join(" "),
               textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+3)+" coins left."
           }
-          newUserScore[message.author.username] = {
+          // newUserScore[message.author.username] = {
+          //   amount: userCurrentMoneys+3,
+          //   wins: 0
+          // }
+          userRef.set({
             amount: userCurrentMoneys+3,
             wins: 0
-          }
-          userRef.set(newUserScore);
+          });
         }else{
             // LOSE
             var resultObject = {
@@ -142,11 +148,14 @@ function spinTheWheel(message, callback) {
                 textResults: ":cherries: Better luck next time...you have "+(userCurrentMoneys-1)+" coins left."
             }
     
-            newUserScore[message.author.username] = {
+            // newUserScore[message.author.username] = {
+            //   amount: userCurrentMoneys-1,
+            //   wins: 0
+            // }
+            userRef.set({
               amount: userCurrentMoneys-1,
               wins: 0
-            }
-            userRef.set(newUserScore);
+            });
         }
     
         callback(message, resultObject);
