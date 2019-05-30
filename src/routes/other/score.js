@@ -119,7 +119,7 @@ function spinTheWheel(message, callback) {
             }
 
             userRef.set({
-              amount: userCurrentMoneys+10,
+              amount: userCurrentMoneys+25,
               wins: 0
             });
         }else if(_.uniq(spinResult).length == 2) {
