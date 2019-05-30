@@ -69,8 +69,8 @@ function spinTheWheel(message, callback) {
         wins: 0
       })
       callback(message, {
-        visualResults: "------",
-        textResults: "You have 100 coins in the back! Trigger `!slots` to start playing!"
+        visualResults: "--- Welcome to the MV Casino! ---",
+        textResults: "You have 100 coins in the bank! Trigger `!slots` to start playing!"
       });
       return false;
     }
