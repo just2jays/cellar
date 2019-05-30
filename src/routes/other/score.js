@@ -65,11 +65,6 @@ function spinTheWheel(message, callback) {
   userRef.once("value", function(snapshot) {
     console.log('🔥🔥🔥🔥 eh 🔥🔥🔥🔥', '\n', snapshot.exists());
     if(!snapshot.exists()){
-      // newUserScore[message.author.username] = {
-      //   amount: 100,
-      //   wins: 0
-      // }
-      // slotsScore.set(newUserScore);
       var newUserRef = slotsScore.child(message.author.username).set({
         amount: 100,
         wins: 0
@@ -128,7 +123,7 @@ function spinTheWheel(message, callback) {
               amount: userCurrentMoneys+10,
               wins: 0
             }
-            slotsScore.set(newUserScore);
+            userRef.set(newUserScore);
         }else if(_.uniq(spinResult).length == 2) {
           // 2 out of 3
           var resultObject = {
@@ -139,7 +134,7 @@ function spinTheWheel(message, callback) {
             amount: userCurrentMoneys+3,
             wins: 0
           }
-          slotsScore.set(newUserScore);
+          userRef.set(newUserScore);
         }else{
             // LOSE
             var resultObject = {
@@ -151,7 +146,7 @@ function spinTheWheel(message, callback) {
               amount: userCurrentMoneys-1,
               wins: 0
             }
-            slotsScore.set(newUserScore);
+            userRef.set(newUserScore);
         }
     
         callback(message, resultObject);
