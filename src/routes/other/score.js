@@ -12,6 +12,7 @@ firebaseAdmin.initializeApp({
 var firebaseDB = firebaseAdmin.database();
 var slotsRef = firebaseDB.ref("mvslots");
 var slotsScore = slotsRef.child("stats");
+var slotStatsRef = firebaseDB.ref("mvslots/slotStats");
 
 var client = new Discord.Client;
 
@@ -74,6 +75,10 @@ function spinTheWheel(message, callback) {
       });
       return false;
     }
+    // Update total spin count
+    slotStatsRef.child("total").transaction(function (current_value) {
+      return (current_value || 0) + 1;
+    });
     snapshot.forEach(function(child) {
       
       if(child.key === "amount"){
@@ -122,6 +127,11 @@ function spinTheWheel(message, callback) {
               amount: userCurrentMoneys+25,
               wins: 0
             });
+
+            // Update JACKPOT WIN count
+            slotStatsRef.child("jackpot").transaction(function (current_value) {
+              return (current_value || 0) + 1;
+            });
         }else if(_.uniq(spinResult).length == 2) {
           // 2 out of 3
           var resultObject = {
@@ -132,6 +142,11 @@ function spinTheWheel(message, callback) {
           userRef.set({
             amount: userCurrentMoneys+5,
             wins: 0
+          });
+
+          // update MINOR WIN count
+          slotStatsRef.child("minor").transaction(function (current_value) {
+            return (current_value || 0) + 1;
           });
         }else{
             // LOSE
