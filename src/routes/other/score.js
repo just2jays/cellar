@@ -143,7 +143,7 @@ function spinTheWheel(message, callback) {
             // WIN
             var resultObject = {
                 visualResults: spinResult.join(" "),
-                textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+25)+" coins left."+winMultiplier.typeLabel
+                textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys + jackpotWin)+" coins left."+winMultiplier.typeLabel
             }
 
             userRef.set({
@@ -159,7 +159,7 @@ function spinTheWheel(message, callback) {
           // 2 out of 3
           var resultObject = {
               visualResults: spinResult.join(" "),
-              textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+5)+" coins left."+winMultiplier.typeLabel
+              textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys + twoOutOfThreeWin)+" coins left."+winMultiplier.typeLabel
           }
 
           userRef.set({
@@ -175,7 +175,7 @@ function spinTheWheel(message, callback) {
             // LOSE
             var resultObject = {
                 visualResults: spinResult.join(" "),
-                textResults: ":cherries: Better luck next time...you have "+(userCurrentMoneys-1)+" coins left."
+                textResults: ":cherries: Better luck next time...you have "+(userCurrentMoneys - lossCost)+" coins left."
             }
     
 
