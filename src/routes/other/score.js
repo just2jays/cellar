@@ -63,7 +63,7 @@ function getWinMultiplier(){
   var localHours = (localTime.getHours() - 4); // Subtract 4 to account for EST
   var localDay = localTime.getDay() + 1; // Add 1 for Wednesday?? (BUG!)
 
-  if( localDay === 4 && (localHours >= 12 && localHours <= 16) ){
+  if( localDay === 4 && (localHours == 13) ){
     return {
       typeLabel: ' :upside_down: A Wacky Wednesday Win! :upside_down: ',
       amount: 40
