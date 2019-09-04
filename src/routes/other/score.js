@@ -66,13 +66,15 @@ function getWinMultiplier(){
   if( localDay === 4 && (localHours == 13) ){
     return {
       typeLabel: ' :upside_down: A Wacky Wednesday Win! :upside_down: ',
-      amount: 40,
+      jackpot: 40,
+      twoOutOfThree: 10,
       spinCost: 20
     };
   }else{
     return {
       typeLabel: '',
-      amount: 1,
+      jackpot: 1,
+      twoOutOfThree: 1,
       spinCost: 1
     };
   }
@@ -82,8 +84,8 @@ function spinTheWheel(message, callback) {
   var userCurrentMoneys = undefined;
   var userRef = slotsScore.child(message.author.username);
   var winMultiplier = getWinMultiplier();
-  let jackpotWin = (25 * winMultiplier.amount); // Amount won for jackpot
-  let twoOutOfThreeWin = (5 * winMultiplier.amount); // Amount won for 2 out of 3
+  let jackpotWin = (25 * winMultiplier.jackpot); // Amount won for jackpot
+  let twoOutOfThreeWin = (5 * winMultiplier.twoOutOfThree); // Amount won for 2 out of 3
   let lossCost = winMultiplier.spinCost; // Cost deducted if no win
 
   userRef.once("value", function(snapshot) {
