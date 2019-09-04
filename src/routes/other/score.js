@@ -53,16 +53,36 @@ function getTotalCount(message, callback) {
     });
 }
 
+
+
 /*
  * SLOTS BOT
  */
+function getWinMultiplier(){
+  var localTime = new Date();
+  var localHours = (localTime.getHours() - 4); // Subtract 4 to account for EST
+  var localDay = localTime.getDay();
+
+  if( localDay === 4 && (localHours >= 12 && localHours <= 17) ){
+    return {
+      typeLabel: ' :upside_down: A Wacky Wednesday Win! :upside_down: ',
+      amount: 40
+    };
+  }else{
+    return {
+      typeLabel: '',
+      amount: 1
+    };
+  }
+}
+
 function spinTheWheel(message, callback) {
-
-  var newUserScore = {};
-
   var userCurrentMoneys = undefined;
   var userRef = slotsScore.child(message.author.username);
-  
+  var winMultiplier = getWinMultiplier();
+  let jackpotWin = (25 * winMultiplier.amount); // Amount won for jackpot
+  let twoOutOfThreeWin = (5 * winMultiplier.amount); // Amount won for 2 out of 3
+
   userRef.once("value", function(snapshot) {
     if(!snapshot.exists()){
       var newUserRef = slotsScore.child(message.author.username).set({
@@ -120,11 +140,11 @@ function spinTheWheel(message, callback) {
             // WIN
             var resultObject = {
                 visualResults: spinResult.join(" "),
-                textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+25)+" coins left."
+                textResults: ":moneybag: JACKPOT! You now have "+(userCurrentMoneys+25)+" coins left."+winMultiplier.typeLabel
             }
 
             userRef.set({
-              amount: userCurrentMoneys+25,
+              amount: userCurrentMoneys + jackpotWin,
               wins: 0
             });
 
@@ -136,11 +156,11 @@ function spinTheWheel(message, callback) {
           // 2 out of 3
           var resultObject = {
               visualResults: spinResult.join(" "),
-              textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+5)+" coins left."
+              textResults: ":money_mouth: So close! You now have "+(userCurrentMoneys+5)+" coins left."+winMultiplier.typeLabel
           }
 
           userRef.set({
-            amount: userCurrentMoneys+5,
+            amount: userCurrentMoneys + twoOutOfThreeWin,
             wins: 0
           });
 
