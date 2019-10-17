@@ -1,5 +1,6 @@
 var config = require('../../../config/config.js');
 var request = require('request');
+var axios = require('axios');
 var Discord = require("discord.js");
 var _ = require("lodash");
 
@@ -34,19 +35,39 @@ function postSlotsToDiscord(message, result) {
 * NO NEED BOT
 */
 function generateNoNeed(message, callback) {
-    request.post({url:'/var/www/html/labs/generate.py', formData: {
+    // request.post({url:'/var/www/html/labs/generate.py', formData: {
+    //     subject: 'hotdog',
+    //     font: 'impact',
+    //     rainbow: 'false',
+    //     crazy: 'false',
+    //     no_need: 'true'
+    // }}, function (err, resp, body) {
+    //     if (err) {
+    //         console.log(err);
+    //     }else{
+    //         callback(message, "test no need 2");
+    //     }
+    // });
+
+    axios.get('/var/www/html/labs/generate.py', {
+        params: {
         subject: 'hotdog',
         font: 'impact',
         rainbow: 'false',
         crazy: 'false',
         no_need: 'true'
-    }}, function (err, resp, body) {
-        if (err) {
-            console.log(err);
-        }else{
-            callback(message, "test no need 2");
         }
-    });
+      })
+      .then(function (response) {
+        // console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+        callback(message, "test no need 3");
+      });
 }
 
 /*
