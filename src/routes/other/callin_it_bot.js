@@ -34,7 +34,15 @@ function postSlotsToDiscord(message, result) {
 * NO NEED BOT
 */
 function generateNoNeed(message, callback) {
-    callback(message, "test no need");
+    request.post({url:'/var/www/html/labs/generate.py', formData: {
+        subject: 'hotdog',
+        font: 'impact',
+        rainbow: 'false',
+        crazy: 'false',
+        no_need: 'true'
+    }}, function (err, resp, body) {
+        callback(message, "test no need 2");
+    });
 }
 
 /*
