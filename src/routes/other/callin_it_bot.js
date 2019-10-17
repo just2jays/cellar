@@ -41,7 +41,11 @@ function generateNoNeed(message, callback) {
         crazy: 'false',
         no_need: 'true'
     }}, function (err, resp, body) {
-        callback(message, "test no need 2");
+        if (err) {
+            console.log(err);
+        }else{
+            callback(message, "test no need 2");
+        }
     });
 }
 
