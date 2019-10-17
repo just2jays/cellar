@@ -34,12 +34,7 @@ function postSlotsToDiscord(message, result) {
 * NO NEED BOT
 */
 function generateNoNeed(message, callback) {
-    request('/var/www/html/labs/generate.pyhttp://api.tumblr.com/v2/blog/imcallinit.tumblr.com/info?api_key=bQLV4Cnl5qRFGhHT7cn23k7YXAkmxnZpKCM2eLLFE3kARBi9LD', function (error, response, thebody) {
-        var firstdata = JSON.parse(thebody);
-        var allposts = firstdata.response.blog.posts;
-        var offset = Math.floor(Math.random() * (allposts - 0) + 0);
-        callback(message, "test no need");
-    });
+    callback(message, "test no need");
 }
 
 /*
