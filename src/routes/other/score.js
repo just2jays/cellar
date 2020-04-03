@@ -131,7 +131,8 @@ function spinTheWheel(message, callback) {
             '<:vanwink:525011879119028227>',
             '<:vanimal:524702569541402654>',
             '<:thebaby:524695266813542423>',
-            '<:howie:490214575363588107>'
+            '<:howie:490214575363588107>',
+            '<:rando:692449950604329162>'
         ];
     
         var winningSpin = false;
