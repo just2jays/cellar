@@ -60,13 +60,14 @@ function generateNoNeed(message, callback) {
       })
       .then(function (response) {
         // console.log(response);
+        callback(message, "test no need 4");
       })
       .catch(function (error) {
         console.log(error);
       })
       .then(function () {
         // always executed
-        callback(message, "test no need 3");
+        // callback(message, "test no need 3");
       });
 }
 
