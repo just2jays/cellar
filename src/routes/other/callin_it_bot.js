@@ -49,13 +49,13 @@ function generateNoNeed(message, callback) {
     //     }
     // });
 
-    axios.get('/var/www/html/labs/generate.py', {
+    axios.get('/var/www/botback/generate.php', {
         params: {
-        subject: 'hotdog',
-        font: 'impact',
-        rainbow: 'false',
-        crazy: 'false',
-        no_need: 'true'
+            subject: 'hotdog',
+            font: 'impact',
+            rainbow: 'false',
+            crazy: 'false',
+            no_need: 'true'
         }
       })
       .then(function (response) {
