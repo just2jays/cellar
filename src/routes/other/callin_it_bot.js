@@ -206,7 +206,7 @@ function rollTheDice(message, callback) {
 
 client.on("message", message => {
     if(message.content.includes("!rando")) {
-        $message_array = message.content.split(" ");
+        var message_array = message.content.split(" ");
         getRandomCallinIt(message_array[1], sendToDiscord);
     }
     if(message.content == "!callinit") {
