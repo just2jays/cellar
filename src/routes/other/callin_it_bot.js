@@ -22,6 +22,13 @@ function postToSlack(message, url) {
     });
 }
 
+function sendToDiscord(message, timestamp) {
+    // request(url, function (err, resp, body) {
+        // var data = JSON.parse(body);
+        sendMessage(message, 'https://worldisending.com/callinit/gifs/out_'+timestamp+'.gif');
+    // });
+}
+
 function postRollToDiscord(message, text) {
     sendMessage(message, text)
 }
@@ -69,6 +76,17 @@ function generateNoNeed(message, callback) {
         // always executed
         // callback(message, "test no need 3");
       });
+}
+
+/*
+ * RANDOM CALLIN IT BOT SCRIPT
+ */
+function getRandomCallinIt(message, callback) {
+    request('https://worldisending.com/callinit/generate.php?query='+message+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
+        var firstdata = JSON.parse(thebody);
+        var timestamp = firstdata.response.timestamp;
+        callback(message, timestamp);
+    });
 }
 
 /*
@@ -187,6 +205,10 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
+    if(message.content.includes("!rando")) {
+        $message_array = message.content.split(" ");
+        getRandomCallinIt(message_array[1], sendToDiscord);
+    }
     if(message.content == "!callinit") {
         getTotalCount(message, postToSlack);
     }
