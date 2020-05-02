@@ -81,8 +81,8 @@ function generateNoNeed(message, callback) {
 /*
  * RANDOM CALLIN IT BOT SCRIPT
  */
-function getRandomCallinIt(message, callback) {
-    request('https://worldisending.com/callinit/generate.php?query='+message+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
+function getRandomCallinIt(message, query, callback) {
+    request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
         var firstdata = JSON.parse(thebody);
         var timestamp = firstdata.response.timestamp;
         callback(message, timestamp);
@@ -207,7 +207,7 @@ function rollTheDice(message, callback) {
 client.on("message", message => {
     if(message.content.includes("!rando")) {
         var message_array = message.content.split(" ");
-        getRandomCallinIt(message_array[1], sendToDiscord);
+        getRandomCallinIt(message, message_array[1], sendToDiscord);
     }
     if(message.content == "!callinit") {
         getTotalCount(message, postToSlack);
