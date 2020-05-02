@@ -87,7 +87,7 @@ function getRandomCallinIt(message, query, callback) {
     request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
         var firstdata = JSON.parse(thebody);
         console.log('🚨', '\n', firstdata);
-        var timestamp = firstdata.response.timestamp;
+        var timestamp = firstdata.timestamp;
         callback(message, timestamp);
     });
 }
