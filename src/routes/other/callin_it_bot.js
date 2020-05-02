@@ -25,7 +25,7 @@ function postToSlack(message, url) {
 function sendToDiscord(message, timestamp) {
     // request(url, function (err, resp, body) {
         // var data = JSON.parse(body);
-        sendMessage(message, 'https://worldisending.com/callinit/gifs/out_'+timestamp+'.gif');
+        sendMessage(message, timestamp);
     // });
 }
 
@@ -86,7 +86,7 @@ function getRandomCallinIt(message, callback) {
         var firstdata = JSON.parse(thebody);
         console.log('✅', '\n', firstdata);
         var timestamp = firstdata.response.timestamp;
-        callback(message, timestamp);
+        callback(message, 'ciao');
     });
 }
 
