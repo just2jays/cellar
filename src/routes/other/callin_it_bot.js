@@ -82,6 +82,7 @@ function generateNoNeed(message, callback) {
  * RANDOM CALLIN IT BOT SCRIPT
  */
 function getRandomCallinIt(message, query, callback) {
+    console.log('✅', '\n', query);
     request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
         var firstdata = JSON.parse(thebody);
         var timestamp = firstdata.response.timestamp;
