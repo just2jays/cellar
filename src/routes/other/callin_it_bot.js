@@ -25,7 +25,7 @@ function postToSlack(message, url) {
 function sendToDiscord(message, timestamp) {
     // request(url, function (err, resp, body) {
         // var data = JSON.parse(body);
-        sendMessage(message, timestamp);
+        sendMessage(message, 'https://worldisending.com/callinit/gifs/out_'+timestamp+'.gif');
     // });
 }
 
@@ -84,9 +84,8 @@ function generateNoNeed(message, callback) {
 function getRandomCallinIt(message, callback) {
     request('https://worldisending.com/callinit/generate.php?query='+message+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
         var firstdata = JSON.parse(thebody);
-        console.log('✅', '\n', firstdata);
         var timestamp = firstdata.response.timestamp;
-        callback(message, 'ciao');
+        callback(message, timestamp);
     });
 }
 
@@ -206,7 +205,6 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
-    console.log('🚨🚨🚨🚨🚨', '\n', message.content);
     if(message.content.includes("!rando")) {
         $message_array = message.content.split(" ");
         getRandomCallinIt(message_array[1], sendToDiscord);
