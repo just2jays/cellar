@@ -209,8 +209,13 @@ function rollTheDice(message, callback) {
 
 client.on("message", message => {
     if(message.content.includes("!rando")) {
-        var message_array = message.content.split(" ");
-        getRandomCallinIt(message, message_array[1], sendToDiscord);
+        var queryArray = message.content.split(" ");
+        // console.log(queryArray);
+        var joinedQuery = queryArray.slice(1,queryArray.length).join('+').toLowerCase();
+        // console.log(joinedQuery);
+        // var message_array = message.content.split(" ");
+        // var joinedQuery = message_array.slice(1,message_array.length).join('+');
+        getRandomCallinIt(message, joinedQuery, sendToDiscord);
     }
     if(message.content == "!callinit") {
         getTotalCount(message, postToSlack);
