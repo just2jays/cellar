@@ -81,10 +81,10 @@ function generateNoNeed(message, callback) {
 /*
  * RANDOM CALLIN IT BOT SCRIPT
  */
-function getRandomCallinIt(message, query, callback) {
+function getRandomCallinIt(message, query, callback, asNoNeed = false) {
     console.log('✅', '\n', query);
-    console.log('🔶', '\n', 'https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need=false');
-    request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need=false', function (error, response, thebody) {
+    console.log('🔶', '\n', 'https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed);
+    request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed, function (error, response, thebody) {
         var firstdata = JSON.parse(thebody);
         console.log('🚨', '\n', firstdata);
         var timestamp = firstdata.timestamp;
@@ -215,7 +215,7 @@ client.on("message", message => {
         // console.log(joinedQuery);
         // var message_array = message.content.split(" ");
         // var joinedQuery = message_array.slice(1,message_array.length).join('+');
-        getRandomCallinIt(message, joinedQuery, sendToDiscord);
+        getRandomCallinIt(message, joinedQuery, sendToDiscord, false);
     }
     if(message.content == "!callinit") {
         getTotalCount(message, postToSlack);
@@ -224,7 +224,13 @@ client.on("message", message => {
         rollTheDice(message, postRollToDiscord);
     }
     if(message.content.includes("!noneed")) {
-        generateNoNeed(message, postRollToDiscord);
+        var queryArray = message.content.split(" ");
+        // console.log(queryArray);
+        var joinedQuery = queryArray.slice(1,queryArray.length).join('+').toLowerCase();
+        // console.log(joinedQuery);
+        // var message_array = message.content.split(" ");
+        // var joinedQuery = message_array.slice(1,message_array.length).join('+');
+        getRandomCallinIt(message, joinedQuery, sendToDiscord, true);
     }
 });
 
