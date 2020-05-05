@@ -81,15 +81,17 @@ function generateNoNeed(message, callback) {
 /*
  * RANDOM CALLIN IT BOT SCRIPT
  */
-function getRandomCallinIt(message, query, callback, asNoNeed = false) {
+function getRandomCallinIt(message, query, callback, asNoNeed = false, useQueryText = false) {
     console.log('✅', '\n', query);
-    console.log('🔶', '\n', 'https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed);
-    request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed, function (error, response, thebody) {
-        var firstdata = JSON.parse(thebody);
-        console.log('🚨', '\n', firstdata);
-        var timestamp = firstdata.timestamp;
-        callback(message, timestamp);
-    });
+    console.log('🔶', '\n', 'https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed+'&use_query_text='+useQueryText);
+    request('https://worldisending.com/callinit/generate.php?query='+query+'&font=impact&rainbow=false&crazy=false&no_need='+asNoNeed+'&use_query_text='+useQueryText,
+        function (error, response, thebody) {
+            var firstdata = JSON.parse(thebody);
+            console.log('🚨', '\n', firstdata);
+            var timestamp = firstdata.timestamp;
+            callback(message, timestamp);
+        }
+    );
 }
 
 /*
@@ -215,7 +217,16 @@ client.on("message", message => {
         // console.log(joinedQuery);
         // var message_array = message.content.split(" ");
         // var joinedQuery = message_array.slice(1,message_array.length).join('+');
-        getRandomCallinIt(message, joinedQuery, sendToDiscord, false);
+        getRandomCallinIt(message, joinedQuery, sendToDiscord, false, false);
+    }
+    if(message.content.startsWith("!crando")) {
+        var queryArray = message.content.split(" ");
+        // console.log(queryArray);
+        var joinedQuery = queryArray.slice(1,queryArray.length).join('+').toLowerCase();
+        // console.log(joinedQuery);
+        // var message_array = message.content.split(" ");
+        // var joinedQuery = message_array.slice(1,message_array.length).join('+');
+        getRandomCallinIt(message, joinedQuery, sendToDiscord, false, true);
     }
     if(message.content == "!callinit") {
         getTotalCount(message, postToSlack);
@@ -230,7 +241,7 @@ client.on("message", message => {
         // console.log(joinedQuery);
         // var message_array = message.content.split(" ");
         // var joinedQuery = message_array.slice(1,message_array.length).join('+');
-        getRandomCallinIt(message, joinedQuery, sendToDiscord, true);
+        getRandomCallinIt(message, joinedQuery, sendToDiscord, true, false);
     }
 });
 
