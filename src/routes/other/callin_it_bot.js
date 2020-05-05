@@ -208,7 +208,7 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
-    if(message.content.includes("!rando")) {
+    if(message.content.startsWith("!rando")) {
         var queryArray = message.content.split(" ");
         // console.log(queryArray);
         var joinedQuery = queryArray.slice(1,queryArray.length).join('+').toLowerCase();
@@ -223,7 +223,7 @@ client.on("message", message => {
     if(message.content == "!rollin") {
         rollTheDice(message, postRollToDiscord);
     }
-    if(message.content.includes("!noneed")) {
+    if(message.content.startsWith("!noneed")) {
         var queryArray = message.content.split(" ");
         // console.log(queryArray);
         var joinedQuery = queryArray.slice(1,queryArray.length).join('+').toLowerCase();
