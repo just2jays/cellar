@@ -255,6 +255,7 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
+    console.log('🚨', '\n', message);
     if(message.content == "!slots") {
         spinTheWheel(message, postSlotsToDiscord);
     }
