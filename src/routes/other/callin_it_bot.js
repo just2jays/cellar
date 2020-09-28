@@ -17,7 +17,7 @@ function sendMessage(message, content, asMention = true) {
 
 function sendBeerMessage(message, content, asMention = true) {
     if(asMention) {
-        message.reply(content);
+        message.reply('Great choice, cheers! 🍻 \n'+content);
     }else{
         message.channel.send(content);
     }
