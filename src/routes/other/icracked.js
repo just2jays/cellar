@@ -44,7 +44,7 @@ client.on("message", message => {
   if(message.content.startsWith("!icracked")) {
     var queryArray = message.content.split(" ");
     // console.log(queryArray);
-    var beerQuery = queryArray.slice(1, queryArray.length).toLowerCase();
+    var beerQuery = queryArray.slice(1, queryArray.length).join(' ').toLowerCase();
     // console.log(joinedQuery);
     // var message_array = message.content.split(" ");
     // var joinedQuery = message_array.slice(1,message_array.length).join('+');
