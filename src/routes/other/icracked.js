@@ -15,10 +15,10 @@ function sendMessage(message, content, asMention = true) {
     
 }
 
-function sendToDiscord(message, timestamp) {
+function sendToDiscord(message, beer) {
     // request(url, function (err, resp, body) {
         // var data = JSON.parse(body);
-        sendMessage(message, 'https://worldisending.com/callinit/gifs/out_'+timestamp+'.gif');
+        sendMessage(message, beer);
     // });
 }
 
@@ -35,7 +35,24 @@ function fetchBeerInfo(message, query, callback) {
           var firstdata = JSON.parse(thebody);
           console.log('🚨', '\n', firstdata);
           var timestamp = firstdata.timestamp;
-          // callback(message, timestamp);
+          var foundBeer = "Beer Not Found :("
+
+          if(firstdata.response.beers.count >= 1){
+            // we found something
+            var matchedItem = firstdata.response.beers.items[0];
+            foundBeer = '\
+            ```\
+            **NAME:** '+matchedItem.beer.beer_name+'\
+            **BREWERY:** '+matchedItem.brewery.brewery_name+'\
+            **STYLE:** '+matchedItem.beer.beer_style+'\
+            **ABV %:** '+matchedItem.beer.beer_abv+'%\
+            **MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid+'\
+            ```\
+            ';
+          }else{
+            foundBeer = "Beer Not Found :("
+          }
+          callback(message, foundBeer);
       }
   );
 }
