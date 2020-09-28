@@ -49,15 +49,11 @@ function fetchBeerInfo(message, query, callback) {
           if(firstdata.response.beers.count >= 1){
             // we found something
             var matchedItem = firstdata.response.beers.items[0];
-            foundBeer = '\
-            ```\
-            **NAME:** '+matchedItem.beer.beer_name+'\
-            **BREWERY:** '+matchedItem.brewery.brewery_name+'\
-            **STYLE:** '+matchedItem.beer.beer_style+'\
-            **ABV %:** '+matchedItem.beer.beer_abv+'%\
-            **MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid+'\
-            ```\
-            ';
+            foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n\
+            **BREWERY:** '+matchedItem.brewery.brewery_name+'\n\
+            **STYLE:** '+matchedItem.beer.beer_style+'\n\
+            **ABV:** '+matchedItem.beer.beer_abv+'%\n\
+            **MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
           }else{
             foundBeer = "Beer Not Found :("
           }
