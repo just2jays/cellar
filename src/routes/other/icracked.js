@@ -6,7 +6,7 @@ var _ = require("lodash");
 
 var client = new Discord.Client;
 
-function sendMessage(message, content, asMention = true) {
+function sendBeerMessage(message, content, asMention = true) {
     if(asMention) {
         message.reply(content);
     }else{
@@ -15,10 +15,10 @@ function sendMessage(message, content, asMention = true) {
     
 }
 
-function sendToDiscord(message, beer) {
+function sendBeerToDiscord(message, beer) {
     // request(url, function (err, resp, body) {
         // var data = JSON.parse(body);
-        sendMessage(message, beer);
+        sendBeerMessage(message, beer);
     // });
 }
 
@@ -66,7 +66,7 @@ client.on("message", message => {
     // var message_array = message.content.split(" ");
     // var joinedQuery = message_array.slice(1,message_array.length).join('+');
     // getRandomCallinIt(message, beerQuery, sendToDiscord, false, false);
-    fetchBeerInfo(message, beerQuery, sendToDiscord);
+    fetchBeerInfo(message, beerQuery, sendBeerToDiscord);
   }
 });
 
