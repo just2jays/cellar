@@ -44,18 +44,18 @@ module.exports = function(app, db) {
         var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
         var userRef = userStats.child(user);
 
-    // userRef.once("value", function(snapshot) {
-    //     if(!snapshot.exists()){
-    //         var newUserRef = userStats.child(user).set({
-    //           amount: 100,
-    //           wins: 0
-    //         })
-    //         // callback(message, {
-    //         //   visualResults: "--- Welcome to the MV Casino! ---",
-    //         //   textResults: "You have 100 coins in the bank! Trigger `!slots` to start playing!"
-    //         // });
-    //         // return false;
-    //     }
+    userRef.once("value", function(snapshot) {
+        if(!snapshot.exists()){
+            var newUserRef = userStats.child(user).set({
+              amount: 100,
+              wins: 0
+            })
+            // callback(message, {
+            //   visualResults: "--- Welcome to the MV Casino! ---",
+            //   textResults: "You have 100 coins in the bank! Trigger `!slots` to start playing!"
+            // });
+            // return false;
+        }
 
     // console.log('✅', '\n', query);
     // console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
@@ -74,12 +74,24 @@ module.exports = function(app, db) {
                     foundBeer = "Beer Not Found :("
                 }
 
-                var beerStatRef = userStats.child(user).set({
-                    name: matchedItem.beer.beer_name,
-                    brewery: matchedItem.brewery.brewery_name,
-                    abv: matchedItem.beer.beer_abv,
-                    style: matchedItem.beer.beer_style
-                })
+                userRef.once("value", function(snapshot) {
+                    if(!snapshot.exists()){
+                        var beerStatRef = userStats.child(user).set({
+                            name: matchedItem.beer.beer_name,
+                            brewery: matchedItem.brewery.brewery_name,
+                            abv: matchedItem.beer.beer_abv,
+                            style: matchedItem.beer.beer_style
+                        })
+                    }else{
+                        var beerStatRef = userStats.child(user).push({
+                            name: matchedItem.beer.beer_name,
+                            brewery: matchedItem.brewery.brewery_name,
+                            abv: matchedItem.beer.beer_abv,
+                            style: matchedItem.beer.beer_style
+                        })
+                    }
+                });
+                
 
                 callback(message, foundBeer);
             }
