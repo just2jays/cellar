@@ -50,36 +50,30 @@ module.exports = function(app, db) {
     /**
      * FETCH USER BEER STATS FROM FIREBASE (NO UNTAPPD API NECCESARY!)
      */
-    function fetchCrackStats(message, user, callback) {
+    async function fetchCrackStats(message, user, callback) {
         // console.log('🔶 fetching for user: ', '\n', user);
         const HISTORY_LIMIT = 5;
         let historyResponse = 'No history found :(';
         var ref = userStatsRef.child(user);
         let beerArray = [];
-        async function test(){
-            ref.once('value',function(snap) {
-                snap.forEach(function(item) {
-                    var itemVal = item.val();
-                    beerArray.push(beerArray);
-                    console.log('🔶 itemVal', '\n', itemVal);
-                });
-                return Promise.resolve(beerArray);
+        const finale = await ref.once('value',function(snap) {
+            snap.forEach(function(item) {
+                var itemVal = item.val();
+                beerArray.push(beerArray);
+                console.log('🔶 itemVal', '\n', itemVal);
             });
+        });
+
+
+        console.log('✅ final beer array', '\n', beerArray);
+        if(beerArray.length > 0) {
+            historyResponse = '';
+            for(let i = 0; i < HISTORY_LIMIT; i++){
+                historyResponse += '**NAME:** '+beerArray[i].name+'\n';
+            }
         }
 
-        test().then((response) => {
-            console.log('✅ final beer array', '\n', beerArray);
-            if(beerArray.length > 0) {
-                historyResponse = '';
-                for(let i = 0; i < HISTORY_LIMIT; i++){
-                    historyResponse += '**NAME:** '+beerArray[i].name+'\n';
-                }
-            }
-            callback(message, historyResponse);
-        })
-        
-
-        
+        callback(message, historyResponse);
     }
 
     /*
