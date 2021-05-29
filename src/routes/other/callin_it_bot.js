@@ -56,16 +56,16 @@ module.exports = function(app, db) {
         let historyResponse = 'No history found :(';
         var ref = userStatsRef.child(user);
         let beerArray = [];
-        const finale = await ref.once('value',function(snap) {
-            snap.forEach(function(item) {
+        const finaleSnap = await ref.once('value');
+
+        // ,function(snap) {
+            finaleSnap.forEach(function(item) {
                 var itemVal = item.val();
                 beerArray.push(beerArray);
                 console.log('🔶 itemVal', '\n', itemVal);
             });
-        });
-
-
-        console.log('✅ final beer array', '\n', beerArray);
+        // }
+        console.log('✅ final beer array', '\n', beerArray, finale);
         if(beerArray.length > 0) {
             historyResponse = '';
             for(let i = 0; i < HISTORY_LIMIT; i++){
