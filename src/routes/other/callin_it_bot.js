@@ -28,7 +28,6 @@ module.exports = function(app, db) {
         }
         
     }
-
     function sendBeerToDiscord(message, beer) {
         // request(url, function (err, resp, body) {
             // var data = JSON.parse(body);
@@ -36,30 +35,43 @@ module.exports = function(app, db) {
         // });
     }
 
-    function sendBeerStatsToDiscord(message, beer) {
+    function sendBeerHistoryMessage(message, content, asMention = true) {
+        if(asMention) {
+            message.reply('here is your last 5 beers 🗓 \n'+content);
+        }else{
+            message.channel.send(content);
+        }
+    }
 
+    function sendBeerStatsToDiscord(message, beerHistory) {
+        sendBeerHistoryMessage(message, beerHistory);
     }
 
     /**
      * FETCH USER BEER STATS FROM FIREBASE (NO UNTAPPD API NECCESARY!)
      */
-    function fetchCrackStats(message, user) {
+    function fetchCrackStats(message, user, callback) {
         // console.log('🔶 fetching for user: ', '\n', user);
-        
-        // userStatsRef.child(user).once('value').then( function(snap) {
-        //     console.log('✅ snap val', '\n', snap.val());
-        // })
-
+        const HISTORY_LIMIT = 5;
+        let historyResponse = 'No history found :(';
         var ref = userStatsRef.child(user);
+        let beerArray = [];
         ref.once('value',function(snap) {
             snap.forEach(function(item) {
                 var itemVal = item.val();
-                console.log('🔶 itemVal', '\n', itemVal);
+                beerArray.push(beerArray);
+                // console.log('🔶 itemVal', '\n', itemVal);
             });
-            // for (i=0; i < keys.length; i++) {
-            //     counts.push(keys[i].wordcount);
-            // }
         });
+
+        if(beerArray.length > 0) {
+            historyResponse = '';
+            for(let i = 0; i < HISTORY_LIMIT; i++){
+                historyResponse += '**NAME:** '+beerArray[i].name+'\n';
+            }
+        }
+
+        callback(message, historyResponse);
     }
 
     /*
