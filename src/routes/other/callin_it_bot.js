@@ -9,7 +9,7 @@ module.exports = function(app, db) {
     var firebaseDB = db;
     var cracksRef = firebaseDB.ref("cracks");
     var userStats = cracksRef.child("userStats");
-    // var slotStatsRef = firebaseDB.ref("mvslots/slotStats");
+    var userStatsRef = firebaseDB.ref("cracks/userStats");
 
     function sendMessage(message, content, asMention = true) {
         if(asMention) {
@@ -36,6 +36,36 @@ module.exports = function(app, db) {
         // });
     }
 
+    function sendBeerStatsToDiscord(message, beer) {
+
+    }
+
+    /**
+     * FETCH USER BEER STATS FROM FIREBASE (NO UNTAPPD API NECCESARY!)
+     */
+    function fetchCrackStats(message, user) {
+        // var userRef = userStats.child(user);
+        // userRef.once("value", function(snapshot) {
+        //     // var beerStatRef = userStats.child(user).push({
+        //     //     name: matchedItem.beer.beer_name,
+        //     //     brewery: matchedItem.brewery.brewery_name,
+        //     //     abv: matchedItem.beer.beer_abv,
+        //     //     style: matchedItem.beer.beer_style
+        //     // });
+        // });
+
+
+        userStatsRef.child(user).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
     /*
     * FETCH BEER FROM UNTAPPD
     */
@@ -55,23 +85,13 @@ module.exports = function(app, db) {
                     var matchedItem = firstdata.response.beers.items[0];
                     foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n**BREWERY:** '+matchedItem.brewery.brewery_name+'\n**STYLE:** '+matchedItem.beer.beer_style+'\n**ABV:** '+matchedItem.beer.beer_abv+'%\n**MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
 
-
                     userRef.once("value", function(snapshot) {
-                        // if(!snapshot.exists()){
-                        //     var beerStatRef = userStats.child(user).set({
-                        //         name: matchedItem.beer.beer_name,
-                        //         brewery: matchedItem.brewery.brewery_name,
-                        //         abv: matchedItem.beer.beer_abv,
-                        //         style: matchedItem.beer.beer_style
-                        //     })
-                        // }else{
-                            var beerStatRef = userStats.child(user).push({
-                                name: matchedItem.beer.beer_name,
-                                brewery: matchedItem.brewery.brewery_name,
-                                abv: matchedItem.beer.beer_abv,
-                                style: matchedItem.beer.beer_style
-                            })
-                        // }
+                        var beerStatRef = userStats.child(user).push({
+                            name: matchedItem.beer.beer_name,
+                            brewery: matchedItem.brewery.brewery_name,
+                            abv: matchedItem.beer.beer_abv,
+                            style: matchedItem.beer.beer_style
+                        });
                     });
 
                 }else{
@@ -326,19 +346,19 @@ module.exports = function(app, db) {
             fetchBeerInfo(message, beerQuery, authorHash, sendBeerToDiscord);
         }
 
-        // if(message.content.startsWith("!mycracks")) {
-        //     var authorName = _.get(message, 'author.username');
-        //     var authorId = _.get(message, 'author.id');
-        //     var authorHash = `${authorName}-${authorId}`;
-        //     // var queryArray = message.content.split(" ");
-        //     // console.log(queryArray);
-        //     var beerQuery = queryArray.slice(1, queryArray.length).join(' ').toLowerCase();
-        //     // console.log(joinedQuery);
-        //     // var message_array = message.content.split(" ");
-        //     // var joinedQuery = message_array.slice(1,message_array.length).join('+');
-        //     // getRandomCallinIt(message, beerQuery, sendToDiscord, false, false);
-        //     fetchCrackStats(message, beerQuery, sendBeerToDiscord);
-        // }
+        if(message.content.startsWith("!mycracks")) {
+            var authorName = _.get(message, 'author.username');
+            var authorId = _.get(message, 'author.id');
+            var authorHash = `${authorName}-${authorId}`;
+            // var queryArray = message.content.split(" ");
+            // console.log(queryArray);
+            // var beerQuery = queryArray.slice(1, queryArray.length).join(' ').toLowerCase();
+            // console.log(joinedQuery);
+            // var message_array = message.content.split(" ");
+            // var joinedQuery = message_array.slice(1,message_array.length).join('+');
+            // getRandomCallinIt(message, beerQuery, sendToDiscord, false, false);
+            fetchCrackStats(message, authorHash, sendBeerStatsToDiscord);
+        }
     });
 
     client.login(config.discord.TOKEN);
