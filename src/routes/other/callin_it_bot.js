@@ -65,13 +65,13 @@ module.exports = function(app, db) {
                 console.log('🔶 itemVal', '\n', itemVal);
             });
         // }
-        console.log('✅ final beer array', '\n', beerArray);
-        if(beerArray.length > 0) {
-            historyResponse = '';
-            for(let i = 0; i < HISTORY_LIMIT; i++){
-                historyResponse += '**NAME:** '+beerArray[i].name+'\n';
-            }
-        }
+        console.log('✅ final beer array', '\n', beerArray[0]);
+        // if(beerArray.length > 0) {
+        //     historyResponse = '';
+        //     for(let i = 0; i < HISTORY_LIMIT; i++){
+        //         historyResponse += '**NAME:** '+beerArray[i].name+'\n';
+        //     }
+        // }
 
         callback(message, historyResponse);
     }
