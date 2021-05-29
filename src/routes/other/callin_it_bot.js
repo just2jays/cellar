@@ -57,20 +57,17 @@ module.exports = function(app, db) {
         var ref = userStatsRef.child(user);
         let beerArray = [];
         const finaleSnap = await ref.once('value');
+        finaleSnap.forEach(function(item) {
+            var itemVal = item.val();
+            // console.log('🔶 itemVal', '\n', itemVal);
+            beerArray.push(itemVal);
+        });
 
-        // ,function(snap) {
-            finaleSnap.forEach(function(item) {
-                var itemVal = item.val();
-                beerArray.push(itemVal);
-                console.log('🔶 itemVal', '\n', itemVal);
-            });
-        // }
-        // console.log('✅ final beer array', '\n', beerArray[0]);
         if(beerArray.length > 0) {
             historyResponse = '';
             for(let i = 0; i < beerArray.length; i++){
                 if(beerArray[i]){
-                    historyResponse += '**NAME:** '+beerArray[i].name+'\n';
+                    historyResponse += i+') **NAME:** '+beerArray[i].name+'\n';
                 }
             }
         }
