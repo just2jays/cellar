@@ -44,12 +44,12 @@ module.exports = function(app, db) {
         var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
         var userRef = userStats.child(user);
 
-    userRef.once("value", function(snapshot) {
-        if(!snapshot.exists()){
-            var newUserRef = userStats.child(user).set({
-              amount: 100,
-              wins: 0
-            })
+    // userRef.once("value", function(snapshot) {
+    //     if(!snapshot.exists()){
+    //         var newUserRef = userStats.child(user).set({
+    //           amount: 100,
+    //           wins: 0
+    //         })
             // callback(message, {
             //   visualResults: "--- Welcome to the MV Casino! ---",
             //   textResults: "You have 100 coins in the bank! Trigger `!slots` to start playing!"
