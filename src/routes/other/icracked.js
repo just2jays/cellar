@@ -3,21 +3,8 @@ var request = require('request');
 var axios = require('axios');
 var Discord = require("discord.js");
 var _ = require("lodash");
-var firebaseAdmin = require('firebase-admin');
 
-// Initialize Discord
 var client = new Discord.Client;
-
-// Initialize Firebase
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
-  databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-});
-
-var firebaseDB = firebaseAdmin.database();
-var cracksRef = firebaseDB.ref("cracks");
-var userStats = cracksRef.child("userStats");
-// var slotStatsRef = firebaseDB.ref("mvslots/slotStats");
 
 function sendBeerMessage(message, content, asMention = true) {
     if(asMention) {
@@ -41,8 +28,8 @@ function sendBeerToDiscord(message, beer) {
 function fetchBeerInfo(message, query, callback) {
   var client_id = config.untappd.UNTAPPED_CLIENT_ID;
   var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
-  // console.log('✅', '\n', query);
-  // console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
+  console.log('✅', '\n', query);
+  console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
   request('https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset',
       function (error, response, thebody) {
           var firstdata = JSON.parse(thebody);
@@ -71,7 +58,6 @@ function fetchBeerInfo(message, query, callback) {
 }
 
 client.on("message", message => {
-  console.log('✅ message', '\n', message);
   if(message.content.startsWith("!icracked")) {
     var queryArray = message.content.split(" ");
     // console.log(queryArray);

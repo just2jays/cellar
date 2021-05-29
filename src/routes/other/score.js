@@ -1,13 +1,13 @@
 var config = require('../../../config/config.js');
 var request = require('request');
 var Discord = require("discord.js");
-// var firebaseAdmin = require('firebase-admin');
+var firebaseAdmin = require('firebase-admin');
 var _ = require("lodash");
 
-// firebaseAdmin.initializeApp({
-//   credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
-//   databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-// });
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
+  databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
+});
 
 var firebaseDB = firebaseAdmin.database();
 var slotsRef = firebaseDB.ref("mvslots");
@@ -255,7 +255,7 @@ function rollTheDice(message, callback) {
 }
 
 client.on("message", message => {
-    // console.log('🚨', '\n', message);
+    console.log('🚨', '\n', message);
     if(message.content == "!slots") {
         spinTheWheel(message, postSlotsToDiscord);
     }
