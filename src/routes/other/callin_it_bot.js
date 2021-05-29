@@ -54,12 +54,21 @@ module.exports = function(app, db) {
         //     // });
         // });
 
-        console.log('🔶 fetching for user: ', '\n', user);
+        // console.log('🔶 fetching for user: ', '\n', user);
+
 
         userStatsRef.child(user).once('value').then( function(snap) {
             // const user = snap.val()
             // const userKey = snap.key
-            console.log('✅ snap val', '\n', snap.val());
+            // console.log('✅ snap val', '\n', snap.val());
+            let snapArray = [...snap.val()];
+            console.log('✅ snapArray', '\n', snapArray);
+            snapshot.forEach(snap => {
+                // var k = userSnapshot.key;
+                // var id = userSnapshot.val().AssignedID;
+                // var name = userSnapshot.val().Name;
+                console.log('🚨 snap', '\n', snap.val());
+            })
         })
         // userStatsRef.child(user).get().then((snapshot) => {
         //     if (snapshot.exists()) {
