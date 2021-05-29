@@ -41,8 +41,8 @@ function sendBeerToDiscord(message, beer) {
 function fetchBeerInfo(message, query, callback) {
   var client_id = config.untappd.UNTAPPED_CLIENT_ID;
   var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
-  console.log('✅', '\n', query);
-  console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
+  // console.log('✅', '\n', query);
+  // console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
   request('https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset',
       function (error, response, thebody) {
           var firstdata = JSON.parse(thebody);
