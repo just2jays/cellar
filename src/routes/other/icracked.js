@@ -3,8 +3,21 @@ var request = require('request');
 var axios = require('axios');
 var Discord = require("discord.js");
 var _ = require("lodash");
+var firebaseAdmin = require('firebase-admin');
 
+// Initialize Discord
 var client = new Discord.Client;
+
+// Initialize Firebase
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
+  databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
+});
+
+var firebaseDB = firebaseAdmin.database();
+var cracksRef = firebaseDB.ref("cracks");
+var userStats = cracksRef.child("userStats");
+// var slotStatsRef = firebaseDB.ref("mvslots/slotStats");
 
 function sendBeerMessage(message, content, asMention = true) {
     if(asMention) {
@@ -58,6 +71,7 @@ function fetchBeerInfo(message, query, callback) {
 }
 
 client.on("message", message => {
+  console.log('✅ message', '\n', message);
   if(message.content.startsWith("!icracked")) {
     var queryArray = message.content.split(" ");
     // console.log(queryArray);
