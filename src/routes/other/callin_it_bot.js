@@ -54,7 +54,7 @@ module.exports = function(app, db) {
         //     // });
         // });
 
-
+        console.log('🔶 fetching for user: ', '\n', user);
         userStatsRef.child(user).get().then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
@@ -298,7 +298,7 @@ module.exports = function(app, db) {
     }
 
     client.on("message", message => {
-        console.log('🔶 MESSAGE RECEIVED', '\n', message);
+        // console.log('🔶 MESSAGE RECEIVED', '\n', message);
         if(message.content.startsWith("!rando")) {
             var queryArray = message.content.split(" ");
             // console.log(queryArray);
