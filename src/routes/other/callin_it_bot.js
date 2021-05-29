@@ -63,7 +63,7 @@ module.exports = function(app, db) {
             // console.log('✅ snap val', '\n', snap.val());
             let snapArray = [...snap.val()];
             console.log('✅ snapArray', '\n', snapArray);
-            snapshot.forEach(snap => {
+            snap.forEach(snap => {
                 // var k = userSnapshot.key;
                 // var id = userSnapshot.val().AssignedID;
                 // var name = userSnapshot.val().Name;
