@@ -12,7 +12,7 @@ var client = new Discord.Client;
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
   databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-});
+}, 'icracked-stats');
 
 var firebaseDB = firebaseAdmin.database();
 var cracksRef = firebaseDB.ref("cracks");
