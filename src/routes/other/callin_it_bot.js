@@ -39,28 +39,51 @@ module.exports = function(app, db) {
     /*
     * FETCH BEER FROM UNTAPPD
     */
-    function fetchBeerInfo(message, query, callback) {
-    var client_id = config.untappd.UNTAPPED_CLIENT_ID;
-    var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
+    function fetchBeerInfo(message, query, user, callback) {
+        var client_id = config.untappd.UNTAPPED_CLIENT_ID;
+        var client_secret = config.untappd.UNTAPPED_CLIENT_SECRET;
+        var userRef = userStats.child(user);
+
+    // userRef.once("value", function(snapshot) {
+    //     if(!snapshot.exists()){
+    //         var newUserRef = userStats.child(user).set({
+    //           amount: 100,
+    //           wins: 0
+    //         })
+    //         // callback(message, {
+    //         //   visualResults: "--- Welcome to the MV Casino! ---",
+    //         //   textResults: "You have 100 coins in the bank! Trigger `!slots` to start playing!"
+    //         // });
+    //         // return false;
+    //     }
+
     // console.log('✅', '\n', query);
     // console.log('🔶', '\n', 'https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset');
-    request('https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset',
-        function (error, response, thebody) {
-            var firstdata = JSON.parse(thebody);
-            console.log('🚨', '\n', firstdata);
-            var timestamp = firstdata.timestamp;
-            var foundBeer = "Beer Not Found :("
+        request('https://api.untappd.com/v4/search/beer?client_id='+client_id+'&client_secret='+client_secret+'&q='+query+'&limit=1&sort&offset',
+            function (error, response, thebody) {
+                var firstdata = JSON.parse(thebody);
+                console.log('🚨', '\n', firstdata);
+                var timestamp = firstdata.timestamp;
+                var foundBeer = "Beer Not Found :("
 
-            if(firstdata.response.beers.count >= 1){
-                // we found something
-                var matchedItem = firstdata.response.beers.items[0];
-                foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n**BREWERY:** '+matchedItem.brewery.brewery_name+'\n**STYLE:** '+matchedItem.beer.beer_style+'\n**ABV:** '+matchedItem.beer.beer_abv+'%\n**MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
-            }else{
-                foundBeer = "Beer Not Found :("
+                if(firstdata.response.beers.count >= 1){
+                    // we found something
+                    var matchedItem = firstdata.response.beers.items[0];
+                    foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n**BREWERY:** '+matchedItem.brewery.brewery_name+'\n**STYLE:** '+matchedItem.beer.beer_style+'\n**ABV:** '+matchedItem.beer.beer_abv+'%\n**MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
+                }else{
+                    foundBeer = "Beer Not Found :("
+                }
+
+                var beerStatRef = userStats.child(user).set({
+                    name: matchedItem.beer.beer_name,
+                    brewery: matchedItem.brewery.brewery_name,
+                    abv: matchedItem.beer.beer_abv,
+                    style: matchedItem.beer.beer_style
+                })
+
+                callback(message, foundBeer);
             }
-            callback(message, foundBeer);
-        }
-    );
+        );
     }
 
     function postToSlack(message, url) {
@@ -295,14 +318,30 @@ module.exports = function(app, db) {
 
         if(message.content.startsWith("!icracked")) {
             var queryArray = message.content.split(" ");
-            // console.log(queryArray);
+            var authorName = _.get(message, 'author.username');
+            var authorId = _.get(message, 'author.id');
+            var authorHash = `${authorName}-${authorId}`;
             var beerQuery = queryArray.slice(1, queryArray.length).join(' ').toLowerCase();
             // console.log(joinedQuery);
             // var message_array = message.content.split(" ");
             // var joinedQuery = message_array.slice(1,message_array.length).join('+');
             // getRandomCallinIt(message, beerQuery, sendToDiscord, false, false);
-            fetchBeerInfo(message, beerQuery, sendBeerToDiscord);
+            fetchBeerInfo(message, beerQuery, authorHash, sendBeerToDiscord);
         }
+
+        // if(message.content.startsWith("!mycracks")) {
+        //     var authorName = _.get(message, 'author.username');
+        //     var authorId = _.get(message, 'author.id');
+        //     var authorHash = `${authorName}-${authorId}`;
+        //     // var queryArray = message.content.split(" ");
+        //     // console.log(queryArray);
+        //     var beerQuery = queryArray.slice(1, queryArray.length).join(' ').toLowerCase();
+        //     // console.log(joinedQuery);
+        //     // var message_array = message.content.split(" ");
+        //     // var joinedQuery = message_array.slice(1,message_array.length).join('+');
+        //     // getRandomCallinIt(message, beerQuery, sendToDiscord, false, false);
+        //     fetchCrackStats(message, beerQuery, sendBeerToDiscord);
+        // }
     });
 
     client.login(config.discord.TOKEN);
