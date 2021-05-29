@@ -57,21 +57,21 @@ module.exports = function(app, db) {
 
 
                     userRef.once("value", function(snapshot) {
-                        if(!snapshot.exists()){
-                            var beerStatRef = userStats.child(user).set({
-                                name: matchedItem.beer.beer_name,
-                                brewery: matchedItem.brewery.brewery_name,
-                                abv: matchedItem.beer.beer_abv,
-                                style: matchedItem.beer.beer_style
-                            })
-                        }else{
+                        // if(!snapshot.exists()){
+                        //     var beerStatRef = userStats.child(user).set({
+                        //         name: matchedItem.beer.beer_name,
+                        //         brewery: matchedItem.brewery.brewery_name,
+                        //         abv: matchedItem.beer.beer_abv,
+                        //         style: matchedItem.beer.beer_style
+                        //     })
+                        // }else{
                             var beerStatRef = userStats.child(user).push({
                                 name: matchedItem.beer.beer_name,
                                 brewery: matchedItem.brewery.brewery_name,
                                 abv: matchedItem.beer.beer_abv,
                                 style: matchedItem.beer.beer_style
                             })
-                        }
+                        // }
                     });
 
                 }else{
