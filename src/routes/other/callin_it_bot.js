@@ -3,7 +3,7 @@ var request = require('request');
 var axios = require('axios');
 var Discord = require("discord.js");
 var _ = require("lodash");
-// var firebaseAdmin = require('firebase-admin');
+var firebaseAdmin = require('firebase-admin');
 
 // Initialize Discord
 var client = new Discord.Client;
