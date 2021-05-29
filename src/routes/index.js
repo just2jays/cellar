@@ -10,4 +10,5 @@ module.exports = function(app, db) {
   showRoutes(app, db);
   artistRoutes(app, db);
   score_bot(app, db);
+  callin_it_bot(app, db);
 };
