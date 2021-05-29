@@ -70,7 +70,7 @@ module.exports = function(app, db) {
             historyResponse = '';
             for(let i = 0; i < beerArray.length; i++){
                 if(beerArray[i]){
-                    historyResponse += i+') **NAME:** '+beerArray[i].name+'\n';
+                    historyResponse += (i+1)+') **NAME:** '+beerArray[i].name+'\n';
                 }
             }
         }
