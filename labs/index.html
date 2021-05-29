@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <div class="container">
+    <div class="displayContainer text-center">
+      <div id="image_holder"></div>
+      <h2>Callin' It Generator</h2>
+      <p class="lead">So you want to create an epic "Callin' It" meme? You've come to the right place!</p>
+    </div>
+    <form id="main-search-form">
+      <div class="form-row">
+        <div class="form-group col-md-8">
+        <label for="query_text" class="sr-only">What should call it?</label>
+        <input type="text" id="query_text" class="form-control" placeholder="What should call it?" required autofocus>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="font_selector" class="sr-only">Fonts</label>
+          <select id="font_selector" class="form-control">
+            <option value="impact" selected>Impact</option>
+            <option value="pacifico">Pacifico</option>
+            <option value="caviar_dreams">Caviar Dreams</option>
+            <option value="seaside_resort">Seaside Resort</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-2">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineExtraOptions" id="inlineRainbowOption" value="rainbow">
+            <label class="form-check-label" for="inlineRainbowOption">🌈</label>
+          </div>
+        </div>
+        <div class="form-group col-2">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineExtraOptions" id="inlineCrazyOption" value="crazy">
+            <label class="form-check-label" for="inlineCrazyOption">😜</label>
+          </div>
+        </div>
+        <div class="form-group col-2">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineExtraOptions" id="inlineNoNeedOption" value="noneed">
+            <label class="form-check-label" for="inlineNoNeedOption">🖐</label>
+          </div>
+        </div>
+      </div>
+      <button id="generate" class="btn btn-lg btn-primary btn-block" type="submit">Call It!</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

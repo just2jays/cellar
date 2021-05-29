@@ -1,0 +1,44 @@
+#main-search-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.displayContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#image_holder {
+  margin-bottom: 25px;
+}
+
+/* Loading Spinner Animation */
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+.loadingSpinner {
+  height: 50px;
+  opacity: 1;
+  position: relative;
+  transition: opacity linear 0.1s;    
+}
+.loadingSpinner::before {
+  animation: 2s linear infinite spinner;
+  border: solid 3px #eee;
+  border-bottom-color: rgb(58, 190, 58);
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  left: 50%;
+  opacity: inherit;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center;
+  width: 40px;
+  will-change: transform;
+}
