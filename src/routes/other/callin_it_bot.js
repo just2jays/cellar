@@ -258,6 +258,7 @@ module.exports = function(app, db) {
     }
 
     client.on("message", message => {
+        console.log('🔶 MESSAGE RECEIVED', '\n', message);
         if(message.content.startsWith("!rando")) {
             var queryArray = message.content.split(" ");
             // console.log(queryArray);
