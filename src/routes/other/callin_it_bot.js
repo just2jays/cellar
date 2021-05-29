@@ -44,34 +44,22 @@ module.exports = function(app, db) {
      * FETCH USER BEER STATS FROM FIREBASE (NO UNTAPPD API NECCESARY!)
      */
     function fetchCrackStats(message, user) {
-        // var userRef = userStats.child(user);
-        // userRef.once("value", function(snapshot) {
-        //     // var beerStatRef = userStats.child(user).push({
-        //     //     name: matchedItem.beer.beer_name,
-        //     //     brewery: matchedItem.brewery.brewery_name,
-        //     //     abv: matchedItem.beer.beer_abv,
-        //     //     style: matchedItem.beer.beer_style
-        //     // });
-        // });
-
         // console.log('🔶 fetching for user: ', '\n', user);
         
+        // userStatsRef.child(user).once('value').then( function(snap) {
+        //     console.log('✅ snap val', '\n', snap.val());
+        // })
 
-        userStatsRef.child(user).once('value').then( function(snap) {
-            // const user = snap.val()
-            // const userKey = snap.key
-            console.log('✅ snap val', '\n', snap.val());
-            console.log('🔶 snapArray', '\n', [...snap.val()]);
-        })
-        // userStatsRef.child(user).get().then((snapshot) => {
-        //     if (snapshot.exists()) {
-        //         console.log(snapshot.val());
-        //     } else {
-        //         console.log("No data available");
-        //     }
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
+        var ref = userStatsRef.child(user);
+        ref.once('value',function(snap) {
+            snap.forEach(function(item) {
+                var itemVal = item.val();
+                console.log('🔶 itemVal', '\n', itemVal);
+            });
+            // for (i=0; i < keys.length; i++) {
+            //     counts.push(keys[i].wordcount);
+            // }
+        });
     }
 
     /*
