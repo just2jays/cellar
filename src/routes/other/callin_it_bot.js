@@ -60,10 +60,12 @@ module.exports = function(app, db) {
             snap.forEach(function(item) {
                 var itemVal = item.val();
                 beerArray.push(beerArray);
-                // console.log('🔶 itemVal', '\n', itemVal);
+                console.log('🔶 itemVal', '\n', itemVal);
             });
         });
 
+
+        console.log('✅ final beer array', '\n', beerArray);
         if(beerArray.length > 0) {
             historyResponse = '';
             for(let i = 0; i < HISTORY_LIMIT; i++){
