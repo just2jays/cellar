@@ -1,15 +1,12 @@
 var config = require('../../../config/config.js');
 var request = require('request');
 var Discord = require("discord.js");
-var firebaseAdmin = require('firebase-admin');
+
 var _ = require("lodash");
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
-  databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-});
 
-var firebaseDB = firebaseAdmin.database();
+module.exports = function(app, db) {
+var firebaseDB = db;
 var slotsRef = firebaseDB.ref("mvslots");
 var slotsScore = slotsRef.child("stats");
 var slotStatsRef = firebaseDB.ref("mvslots/slotStats");
@@ -262,3 +259,5 @@ client.on("message", message => {
 });
 
 client.login(config.discord.TOKEN);
+
+};
