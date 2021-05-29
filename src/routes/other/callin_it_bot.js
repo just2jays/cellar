@@ -9,10 +9,10 @@ var firebaseAdmin = require('firebase-admin');
 var client = new Discord.Client;
 
 // Initialize Firebase
-// firebaseAdmin.initializeApp({
-//     credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
-//     databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-//   });
+firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
+    databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
+  });
 
 var firebaseDB = firebaseAdmin.database();
 var cracksRef = firebaseDB.ref("cracks");
