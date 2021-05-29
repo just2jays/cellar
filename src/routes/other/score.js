@@ -7,7 +7,7 @@ var _ = require("lodash");
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(config.firebaseAdmin),
   databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
-}, 'scores');
+});
 
 var firebaseDB = firebaseAdmin.database();
 var slotsRef = firebaseDB.ref("mvslots");
