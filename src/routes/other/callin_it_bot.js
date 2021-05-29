@@ -14,9 +14,9 @@ var client = new Discord.Client;
 //     databaseURL: "https://just-trying-stuff-bcd1f.firebaseio.com"
 // });
 
-var firebaseDB = firebaseAdmin.database();
-var cracksRef = firebaseDB.ref("cracks");
-var userStats = cracksRef.child("userStats");
+// var firebaseDB = firebaseAdmin.database();
+// var cracksRef = firebaseDB.ref("cracks");
+// var userStats = cracksRef.child("userStats");
 
 function sendMessage(message, content, asMention = true) {
     if(asMention) {
