@@ -5,9 +5,9 @@ const callin_it_bot = require('./other/callin_it_bot');
 const score_bot = require('./other/score');
 // const icracked = require('./other/icracked');
 
-module.exports = function(app, db) {
-  collectionRoutes(app, db);
-  showRoutes(app, db);
-  artistRoutes(app, db);
+// module.exports = function(app, db) {
+  // collectionRoutes(app, db);
+  // showRoutes(app, db);
+  // artistRoutes(app, db);
   // score_bot(app, db);
-};
+// };
