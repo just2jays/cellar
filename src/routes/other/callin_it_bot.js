@@ -61,7 +61,7 @@ module.exports = function(app, db) {
         // ,function(snap) {
             finaleSnap.forEach(function(item) {
                 var itemVal = item.val();
-                beerArray.push(beerArray);
+                beerArray.push(itemVal);
                 console.log('🔶 itemVal', '\n', itemVal);
             });
         // }
