@@ -63,6 +63,9 @@ module.exports = function(app, db) {
             beerArray.push(itemVal);
         });
 
+        // Sort results DESC (Firebase always returns ASC by default)
+        beerArray.reverse();
+
         if(beerArray.length > 0) {
             historyResponse = '';
             for(let i = 0; i < beerArray.length; i++){
