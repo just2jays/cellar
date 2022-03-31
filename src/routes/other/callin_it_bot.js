@@ -95,7 +95,7 @@ module.exports = function(app, db) {
                 if(firstdata.response.beers.count >= 1){
                     // we found something
                     var matchedItem = firstdata.response.beers.items[0];
-                    foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n**BREWERY:** '+matchedItem.brewery.brewery_name+'\n**LOCATION:** '+matchedItem.brewery.brewery_city+', '+ matchedItem.brewery.brewery_state +'\n**STYLE:** '+matchedItem.beer.beer_style+'\n**ABV:** '+matchedItem.beer.beer_abv+'%\n**MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
+                    foundBeer = '**NAME:** '+matchedItem.beer.beer_name+'\n**BREWERY:** '+matchedItem.brewery.brewery_name+'\n**LOCATION:** '+matchedItem.brewery.location.brewery_city+', '+ matchedItem.brewery.location.brewery_state +'\n**STYLE:** '+matchedItem.beer.beer_style+'\n**ABV:** '+matchedItem.beer.beer_abv+'%\n**MORE INFO:** https://untappd.com/b/'+matchedItem.beer.beer_slug+'/'+matchedItem.beer.bid;
 
                     userRef.once("value", function(snapshot) {
                         var beerStatRef = userStats.child(user).push({
