@@ -310,9 +310,7 @@ module.exports = function(app, db) {
     }
 
     function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, dangerousToken) {
-        console.log('%c URL ', 'background: orange; color: black; display: block;', `https://api.spotify.com/v1/playlists/${playlistId}/tracks`);
-        console.log('%c uris ', 'background: green; color: white; display: block;', `spotify:${uriType.trim()}:${uriId.trim()}`);
-
+        if(uriType !== "track") return; // Catch-all for some reason 'track' uri only thing working?!
 
         axios.post(
             `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
@@ -328,10 +326,11 @@ module.exports = function(app, db) {
         .then(function (response) {
             // console.log(response);
             // callback(message, "test no need 4");
-            message.reply('Should be added?');
+            message.reply('This song was added to the [annual Spotify playlist](https://open.spotify.com/playlist/2s2fkoFaRJ6CptbGxu8ZGt?si=088b83d0e8d64ad9&pt=532856cd30f71b472b9b539120ce759b)!');
         })
         .catch(function (error) {
             console.log(error);
+            message.reply('Something went wrong adding this song to the Spotify playlist. Please try again later.');
         })
         .then(function () {
             // always executed
@@ -341,7 +340,7 @@ module.exports = function(app, db) {
 
     client.on("message", message => {
         // console.log('🔶 MESSAGE RECEIVED', '\n', message);
-        if(message.channel.name === 'testing-123' && message.content.startsWith('https://open.spotify.com/')) {
+        if(message.channel.name === 'music-banter' && message.content.startsWith('https://open.spotify.com/')) {
             const dangerousAuthTokenIsDangerous = 'BQC2SHcX7eMuexUjoQe8xsbnY6hNFYsUTa2-SBc5s_E0MnDTCu1CNjrRVW8dfIboB8AgIkFMucn8Ttk0maCL07Gc61eKQUdjclyB2cJqK_SBQGZjwCFL5GGgt3mAZ-bm4A2OIGI--7-06bDBRZiwRx7Zxe_e7kj4dJigw7WhjYDurKtX7g';
             const playlistId = '2s2fkoFaRJ6CptbGxu8ZGt'; // Playlist ID as of 5/31/2022
             const messageItem = new URL(message.content);
