@@ -309,8 +309,35 @@ module.exports = function(app, db) {
         callback(message, finalScore);
     }
 
+    function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, callback) {
+        axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+            uris: [`${uriType}:${uriId}`]
+        })
+        .then(function (response) {
+            // console.log(response);
+            // callback(message, "test no need 4");
+            message.reply('Should be added?');
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+            // callback(message, "test no need 3");
+        });
+    }
+
     client.on("message", message => {
         console.log('🔶 MESSAGE RECEIVED', '\n', message);
+        if(message.channel.name === 'testing-123' && message.content.startsWith('https://open.spotify.com/')) {
+            const playlistId = '2s2fkoFaRJ6CptbGxu8ZGt'; // Playlist ID as of 5/31/2022
+            const messageItem = new URL(message.content);
+            let uriData = messageItem.pathname.split('/')
+            let uriType = uriData[1];
+            let uriId = uriData[2];
+            addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId);
+        }
+
         if(message.content.startsWith("!rando")) {
             var queryArray = message.content.split(" ");
             // console.log(queryArray);
