@@ -326,7 +326,7 @@ module.exports = function(app, db) {
         .then(function (response) {
             // console.log(response);
             // callback(message, "test no need 4");
-            message.reply(`This song was added to our annual Spotify playlist - https://open.spotify.com/playlist/${playlistId}`);
+            message.reply(`This song was added to our [annual](https://open.spotify.com/track/0q6kkFAc6W9G54xtMOPNaA) Spotify playlist - https://open.spotify.com/playlist/${playlistId}`);
         })
         .catch(function (error) {
             console.log(error);
