@@ -311,7 +311,7 @@ module.exports = function(app, db) {
 
     function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, callback) {
         console.log('%c URL ', 'background: orange; color: black; display: block;', `https://api.spotify.com/v1/playlists/${playlistId}/tracks`);
-        console.log('%c uris ', 'background: green; color: white; display: block;', `${trim(uriType)}:${trim(uriId)}`);
+        console.log('%c uris ', 'background: green; color: white; display: block;', `${uriType.trim()}:${uriId.trim()}`);
 
 
         // axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
