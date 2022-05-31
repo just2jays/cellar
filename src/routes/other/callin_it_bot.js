@@ -311,32 +311,32 @@ module.exports = function(app, db) {
 
     function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, dangerousToken) {
         console.log('%c URL ', 'background: orange; color: black; display: block;', `https://api.spotify.com/v1/playlists/${playlistId}/tracks`);
-        console.log('%c uris ', 'background: green; color: white; display: block;', `${uriType.trim()}:${uriId.trim()}`);
+        console.log('%c uris ', 'background: green; color: white; display: block;', `spotify:${uriType.trim()}:${uriId.trim()}`);
 
 
-        // axios.post(
-        //     `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-        //     {
-        //         uris: [`${uriType}:${uriId}`]
-        //     },
-        //     {
-        //         headers: {
-        //             Authorization: "Bearer " + dangerousToken,
-        //         },
-        //     }
-        // )
-        // .then(function (response) {
-        //     // console.log(response);
-        //     // callback(message, "test no need 4");
-        //     message.reply('Should be added?');
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // })
-        // .then(function () {
-        //     // always executed
-        //     // callback(message, "test no need 3");
-        // });
+        axios.post(
+            `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+            {
+                uris: [`spotify:${uriType}:${uriId}`]
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + dangerousToken,
+                },
+            }
+        )
+        .then(function (response) {
+            // console.log(response);
+            // callback(message, "test no need 4");
+            message.reply('Should be added?');
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+            // callback(message, "test no need 3");
+        });
     }
 
     client.on("message", message => {
