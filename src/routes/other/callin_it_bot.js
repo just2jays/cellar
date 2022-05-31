@@ -347,6 +347,7 @@ module.exports = function(app, db) {
             const messageItem = new URL(message.content);
             let uriData = messageItem.pathname.split('/')
             let uriType = uriData[1];
+            console.log('>'+uriType+'<');
             let uriId = uriData[2];
             addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, dangerousAuthTokenIsDangerous);
         }
