@@ -311,7 +311,7 @@ module.exports = function(app, db) {
 
     function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, callback) {
         console.log('%c URL ', 'background: orange; color: black; display: block;', `https://api.spotify.com/v1/playlists/${playlistId}/tracks`);
-        console.log('%c uris ', 'background: green; color: white; display: block;', `${uriType}:${uriId}`);
+        console.log('%c uris ', 'background: green; color: white; display: block;', `${trim(uriType)}:${trim(uriId)}`);
 
 
         // axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
@@ -332,7 +332,7 @@ module.exports = function(app, db) {
     }
 
     client.on("message", message => {
-        console.log('🔶 MESSAGE RECEIVED', '\n', message);
+        // console.log('🔶 MESSAGE RECEIVED', '\n', message);
         if(message.channel.name === 'testing-123' && message.content.startsWith('https://open.spotify.com/')) {
             const playlistId = '2s2fkoFaRJ6CptbGxu8ZGt'; // Playlist ID as of 5/31/2022
             const messageItem = new URL(message.content);
