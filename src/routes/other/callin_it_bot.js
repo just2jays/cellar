@@ -310,21 +310,25 @@ module.exports = function(app, db) {
     }
 
     function addToSharedSpotifyPlaylist(message, playlistId, uriType, uriId, callback) {
-        axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-            uris: [`${uriType}:${uriId}`]
-        })
-        .then(function (response) {
-            // console.log(response);
-            // callback(message, "test no need 4");
-            message.reply('Should be added?');
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-            // callback(message, "test no need 3");
-        });
+        console.log('%c URL ', 'background: orange; color: black; display: block;', `https://api.spotify.com/v1/playlists/${playlistId}/tracks`);
+        console.log('%c uris ', 'background: green; color: white; display: block;', `${uriType}:${uriId}`);
+
+
+        // axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+        //     uris: [`${uriType}:${uriId}`]
+        // })
+        // .then(function (response) {
+        //     // console.log(response);
+        //     // callback(message, "test no need 4");
+        //     message.reply('Should be added?');
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // })
+        // .then(function () {
+        //     // always executed
+        //     // callback(message, "test no need 3");
+        // });
     }
 
     client.on("message", message => {
