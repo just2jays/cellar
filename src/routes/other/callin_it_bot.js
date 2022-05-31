@@ -326,7 +326,7 @@ module.exports = function(app, db) {
         .then(function (response) {
             // console.log(response);
             // callback(message, "test no need 4");
-            message.reply('This song was added to the [annual Spotify playlist](https://open.spotify.com/playlist/2s2fkoFaRJ6CptbGxu8ZGt?si=088b83d0e8d64ad9&pt=532856cd30f71b472b9b539120ce759b)!');
+            message.reply(`This song was added to our annual Spotify playlist - https://open.spotify.com/playlist/${playlistId}`);
         })
         .catch(function (error) {
             console.log(error);
@@ -340,7 +340,7 @@ module.exports = function(app, db) {
 
     client.on("message", message => {
         // console.log('🔶 MESSAGE RECEIVED', '\n', message);
-        if(message.channel.name === 'music-banter' && message.content.startsWith('https://open.spotify.com/')) {
+        if(message.channel.name === 'testing-123' && message.content.startsWith('https://open.spotify.com/')) {
             const dangerousAuthTokenIsDangerous = 'BQC2SHcX7eMuexUjoQe8xsbnY6hNFYsUTa2-SBc5s_E0MnDTCu1CNjrRVW8dfIboB8AgIkFMucn8Ttk0maCL07Gc61eKQUdjclyB2cJqK_SBQGZjwCFL5GGgt3mAZ-bm4A2OIGI--7-06bDBRZiwRx7Zxe_e7kj4dJigw7WhjYDurKtX7g';
             const playlistId = '2s2fkoFaRJ6CptbGxu8ZGt'; // Playlist ID as of 5/31/2022
             const messageItem = new URL(message.content);
